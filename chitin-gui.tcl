@@ -11,6 +11,7 @@ namespace eval ::chitin:: {
     variable ydim
     variable zdim
     variable perio
+    variable ormat
 
 }
 ##################################################
@@ -82,6 +83,9 @@ proc makePdbLine {template index resId r} {
 
 # Build the crystal.
 proc replicate {n1 n2 n3 crys per} {
+    if {$n1*$n2*$n3*2>9999} {
+	error "to many residues! reduce x, y or z"
+    }
     if {$crys=="Alpha"} {
     
         # Input pdb with 4 molecules (double unit cell)
@@ -349,6 +353,7 @@ proc ::chitin::chitin_gui {} {
     set w [toplevel ".chitin"]
     wm title $w "Chitin Builder"
     wm resizable $w yes yes
+    wm geometry $w 500x173
     set row 0
 
     set ::chitin::crystal "Alpha"
@@ -356,28 +361,28 @@ proc ::chitin::chitin_gui {} {
     set ::chitin::ydim 1
     set ::chitin::zdim 1
     set ::chitin::perio "yes"
-                                                                
+    set ::chitin::ormat "PSF + PDB"                                                           
     #Add a menubar
     frame $w.menubar -relief raised -bd 2
     grid  $w.menubar -padx 1 -column 0 -columnspan 4 -row $row -sticky ew
     menubutton $w.menubar.help -text "Help" -underline 0 \
     -menu $w.menubar.help.menu
-    $w.menubar.help config -width 5
+    $w.menubar.help config -width 81
     pack $w.menubar.help -side right
     menu $w.menubar.help.menu -tearoff no
     $w.menubar.help.menu add command -label "About" \
     -command {tk_messageBox -type ok -title "About Chitin" \
-    -message "Chitin builder tool by DC Malapina and J Faraudo (ICMAB-CSIC) please cite ..."}
-    $w.menubar.help.menu add command -label "Help..." \
+    -message "Chitin builder tool by D C Malapina and J Faraudo. Institut de Ciencia de Materials de Barcelona (ICMAB-CSIC). please cite"}
+    $w.menubar.help.menu add command -label "Documentation..." \
     -command "vmd_open_url ..."
     incr row
 
     #Select the lipid to use
-    grid [label $w.crystakpicklab -text "Crystal: "] \
-    -row $row -column 2 -sticky w
+    grid [label $w.crystalpicklab -text "Crystal allomorph: "] \
+    -row $row -column 0 -sticky w
     grid [menubutton $w.crystalpick -textvar ::chitin::crystal \
     -menu $w.crystalpick.menu -relief raised] \
-    -row $row -column 6 -columnspan 3 -sticky ew
+    -row $row -column 1 -columnspan 3 -sticky ew
     menu $w.crystalpick.menu -tearoff no
     $w.crystalpick.menu add command -label "Alpha" \
     -command {set ::chitin::crystal "Alpha" }
@@ -386,27 +391,27 @@ proc ::chitin::chitin_gui {} {
     -command {set ::chitin::crystal "Beta" }
     incr row
     
-    grid [label $w.mwlabel -text "Chitin crystal x: "] \
-    -row $row -column 2 -columnspan 3 -sticky w
-    grid [entry $w.mw -width 7 -textvariable ::chitin::xdim] -row $row -column 7 -columnspan 1 -sticky ew
+    grid [label $w.mwlabel -text "Times to replicate in x: "] \
+    -row $row -column 0 -columnspan 3 -sticky w
+    grid [entry $w.mw -width 7 -textvariable ::chitin::xdim] -row $row -column 3 -columnspan 1 -sticky ew
     incr row
 
-    grid [label $w.mhlabel -text "Chitin crystal y: "] \
-    -row $row -column 2 -columnspan 3 -sticky w
-    grid [entry $w.mh -width 7 -textvariable ::chitin::ydim] -row $row -column 7 -columnspan 1 -sticky ew
+    grid [label $w.mhlabel -text "Times to replicate in y: "] \
+    -row $row -column 0 -columnspan 3 -sticky w
+    grid [entry $w.mh -width 7 -textvariable ::chitin::ydim] -row $row -column 3 -columnspan 1 -sticky ew
     incr row
 
-    grid [label $w.mzlabel -text "Chitin crystal z: "] \
-    -row $row -column 2 -columnspan 3 -sticky w
-    grid [entry $w.mz -width 7 -textvariable ::chitin::zdim] -row $row -column 7 -columnspan 1 -sticky ew
+    grid [label $w.mzlabel -text "Times to replicate in z: "] \
+    -row $row -column 0 -columnspan 3 -sticky w
+    grid [entry $w.mz -width 7 -textvariable ::chitin::zdim] -row $row -column 3 -columnspan 1 -sticky ew
     incr row
 
     #Select periodic bonds
-    grid [label $w.periopicklab -text "Periodic bonds: "] \
-    -row $row -column 2 -sticky w
+    grid [label $w.periopicklab -text "Periodic bonds in topology: "] \
+    -row $row -column 0 -sticky w
     grid [menubutton $w.periopick -textvar ::chitin::perio \
     -menu $w.periopick.menu -relief raised] \
-    -row $row -column 3 -columnspan 3 -sticky ew
+    -row $row -column 1 -columnspan 3 -sticky ew
     menu $w.periopick.menu -tearoff no
     $w.periopick.menu add command -label "yes" \
     -command {set ::chitin::perio "yes" }
@@ -414,10 +419,25 @@ proc ::chitin::chitin_gui {} {
     -command {set ::chitin::perio "no"}
     incr row
 
+    #Select periodic bonds
+    grid [label $w.outplab -text "Output format: "] \
+    -row $row -column 0 -sticky w
+    grid [menubutton $w.outp -textvar ::chitin::ormat \
+    -menu $w.outp.menu -relief raised] \
+    -row $row -column 1 -columnspan 3 -sticky ew
+    menu $w.outp.menu -tearoff no
+    $w.outp.menu add command -label "PSF + PDB" \
+    -command {set ::chitin::ormat "PSF + PDB" }
+    $w.outp.menu add command -label "XYZ" \
+	-command {set ::chitin::ormat "XYZ"}
+    $w.outp.menu add command -label "GRO + TOP" \
+	-command {set ::chitin::ormat "GRO + TOP"}
+    incr row
+    
     grid [button $w.gobutton -text "Generate crystal" \
       -command [namespace code {
         replicate "$xdim" "$ydim" "$zdim" "$crystal" "$perio"
-      } ]] -row $row -column 2 -columnspan 4 -sticky nsew
+      } ]] -row $row -column 0 -columnspan 4 -sticky nsew
 
 }
 
