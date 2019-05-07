@@ -8,10 +8,11 @@
 # script is sourced, the variable $dir must contain the
 # full path name of this file's directory.
 
-package ifneeded chitin 0.1 "set env(MEMBRANEDIR) [list $dir]; [list source [file join $dir chitin-gui.tcl]]"
+package ifneeded chitin 1.0 "set env(MEMBRANEDIR) [list $dir]; [list source [file join $dir chitin-gui.tcl]]"
 
 #to generate the menu, but returns an error
 #to give the installatino directory to vmd:
 #export TCLLIBPATH="/path $TCLLIBPATH"
 vmd_install_extension chitin chitin_tk    "Modeling/Chitin Builder"
+
 

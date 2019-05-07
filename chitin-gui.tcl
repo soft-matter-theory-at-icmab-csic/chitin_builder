@@ -2,7 +2,7 @@
 # Chitin builder gui
 #
 package require psfgen
-package provide chitin 0.1
+package provide chitin 1.0
 
 namespace eval ::chitin:: {
     variable w
@@ -352,9 +352,9 @@ proc ::chitin::chitin_gui {} {
     set row 0
 
     set ::chitin::crystal "Alpha"
-    set ::chitin::xdim 0
-    set ::chitin::ydim 0
-    set ::chitin::zdim 0
+    set ::chitin::xdim 1
+    set ::chitin::ydim 1
+    set ::chitin::zdim 1
     set ::chitin::perio "yes"
                                                                 
     #Add a menubar
@@ -374,10 +374,10 @@ proc ::chitin::chitin_gui {} {
 
     #Select the lipid to use
     grid [label $w.crystakpicklab -text "Crystal: "] \
-    -row $row -column 0 -sticky w
+    -row $row -column 2 -sticky w
     grid [menubutton $w.crystalpick -textvar ::chitin::crystal \
     -menu $w.crystalpick.menu -relief raised] \
-    -row $row -column 1 -columnspan 3 -sticky ew
+    -row $row -column 6 -columnspan 3 -sticky ew
     menu $w.crystalpick.menu -tearoff no
     $w.crystalpick.menu add command -label "Alpha" \
     -command {set ::chitin::crystal "Alpha" }
@@ -387,26 +387,26 @@ proc ::chitin::chitin_gui {} {
     incr row
     
     grid [label $w.mwlabel -text "Chitin crystal x: "] \
-    -row $row -column 0 -columnspan 3 -sticky w
-    grid [entry $w.mw -width 7 -textvariable ::chitin::xdim] -row $row -column 3 -columnspan 1 -sticky ew
+    -row $row -column 2 -columnspan 3 -sticky w
+    grid [entry $w.mw -width 7 -textvariable ::chitin::xdim] -row $row -column 7 -columnspan 1 -sticky ew
     incr row
 
     grid [label $w.mhlabel -text "Chitin crystal y: "] \
-    -row $row -column 0 -columnspan 3 -sticky w
-    grid [entry $w.mh -width 7 -textvariable ::chitin::ydim] -row $row -column 3 -columnspan 1 -sticky ew
+    -row $row -column 2 -columnspan 3 -sticky w
+    grid [entry $w.mh -width 7 -textvariable ::chitin::ydim] -row $row -column 7 -columnspan 1 -sticky ew
     incr row
 
     grid [label $w.mzlabel -text "Chitin crystal z: "] \
-    -row $row -column 0 -columnspan 3 -sticky w
-    grid [entry $w.mz -width 7 -textvariable ::chitin::zdim] -row $row -column 3 -columnspan 1 -sticky ew
+    -row $row -column 2 -columnspan 3 -sticky w
+    grid [entry $w.mz -width 7 -textvariable ::chitin::zdim] -row $row -column 7 -columnspan 1 -sticky ew
     incr row
 
     #Select periodic bonds
     grid [label $w.periopicklab -text "Periodic bonds: "] \
-    -row $row -column 0 -sticky w
+    -row $row -column 2 -sticky w
     grid [menubutton $w.periopick -textvar ::chitin::perio \
     -menu $w.periopick.menu -relief raised] \
-    -row $row -column 1 -columnspan 3 -sticky ew
+    -row $row -column 3 -columnspan 3 -sticky ew
     menu $w.periopick.menu -tearoff no
     $w.periopick.menu add command -label "yes" \
     -command {set ::chitin::perio "yes" }
@@ -417,9 +417,18 @@ proc ::chitin::chitin_gui {} {
     grid [button $w.gobutton -text "Generate crystal" \
       -command [namespace code {
         replicate "$xdim" "$ydim" "$zdim" "$crystal" "$perio"
-      } ]] -row $row -column 0 -columnspan 4 -sticky nsew
+      } ]] -row $row -column 2 -columnspan 4 -sticky nsew
 
 }
+
+# # Register menu if possible
+# proc chitin::register_menu {} {
+#     variable already_registered
+#     if {$already_registered==0} {
+# 	incr already_registered
+# 	vmd_install_extension chitin chitin_tk "Modeling/Chitin Builder"
+#     }
+# }
 
 proc chitin_tk {} {
   ::chitin::chitin_gui
