@@ -4,13 +4,13 @@ Chitin builder plugin for VMD
 # Installation
 In VMD, open the menu Extensions/VMD Preferences. In the CUSTOM tab add NEW by clicking the button on the left.
 
-In Descriptino add:
+_In Descriptino add:
 
 Chitin_builder
 
-In Code add:
+_In Code add:
 
-lappend auto_path /path_to_your_downloaded_code
+lappend auto_path /path_to/your_downloaded_code
 
 menu main on
 
