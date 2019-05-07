@@ -4,11 +4,11 @@ Chitin builder plugin for VMD
 # Installation
 In VMD, open the menu Extensions/VMD Preferences. In the CUSTOM tab add NEW by clicking the button on the left.
 
-_In Description add:
+__In Description add:
 
 Chitin_builder
 
-_In Code add:
+__In Code add:
 
 lappend auto_path /path_to/your_downloaded_code
 
