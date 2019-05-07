@@ -2,6 +2,9 @@
 Chitin builder plugin for VMD
 
 # Installation
+
+Download the code from the Download button in Github or by git clone
+
 In VMD, open the menu Extensions/VMD Preferences. In the CUSTOM tab add NEW by clicking the button on the left.
 
 __In Description add:__
@@ -17,5 +20,7 @@ menu main on
 package require chitin
 ```
 Press the UPDATE button and also the WRITE SETTINGS TO VMDRC button, press yes if ask to overwrite.
+
 Close VMD and reopen it.
+
 Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
