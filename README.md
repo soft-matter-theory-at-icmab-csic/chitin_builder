@@ -2,7 +2,6 @@
 Chitin builder plugin for VMD.
 
 Developed by D. C. Malaspina and J. Faraudo.
-
 Institut de Ciencia de Materials de Barcelona (ICMAB-CSIC)
 
 please cite:
