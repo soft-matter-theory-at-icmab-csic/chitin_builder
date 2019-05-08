@@ -12,6 +12,10 @@ namespace eval ::chitin:: {
     variable zdim
     variable perio
     variable ormat
+<<<<<<< HEAD
+    variable already_registered 0
+=======
+>>>>>>> 26967e470bc202474da10e90387821b2e6cc766b
 
 }
 ##################################################
@@ -441,14 +445,14 @@ proc ::chitin::chitin_gui {} {
 
 }
 
-# # Register menu if possible
-# proc chitin::register_menu {} {
-#     variable already_registered
-#     if {$already_registered==0} {
-# 	incr already_registered
-# 	vmd_install_extension chitin chitin_tk "Modeling/Chitin Builder"
-#     }
-# }
+# Register menu if possible
+proc chitin::register_menu {} {
+    variable already_registered
+    if {$already_registered==0} {
+	incr already_registered
+	vmd_install_extension chitin chitin_tk "Modeling/Chitin Builder"
+    }
+}
 
 proc chitin_tk {} {
   ::chitin::chitin_gui

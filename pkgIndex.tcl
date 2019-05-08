@@ -13,6 +13,6 @@ package ifneeded chitin 1.0 "set env(MEMBRANEDIR) [list $dir]; [list source [fil
 #to generate the menu, but returns an error
 #to give the installatino directory to vmd:
 #export TCLLIBPATH="/path $TCLLIBPATH"
-vmd_install_extension chitin chitin_tk    "Modeling/Chitin Builder"
-
+#vmd_install_extension chitin chitin_tk    "Modeling/Chitin Builder"
+catch { package require chitin; chitin::register_menu; }
 
