@@ -12,10 +12,7 @@ namespace eval ::chitin:: {
     variable zdim
     variable perio
     variable ormat
-<<<<<<< HEAD
     variable already_registered 0
-=======
->>>>>>> 26967e470bc202474da10e90387821b2e6cc766b
 
 }
 ##################################################
