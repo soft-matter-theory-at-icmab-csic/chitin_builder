@@ -83,14 +83,16 @@ proc makePdbLine {template index resId r} {
 }
 
 # Build the crystal.
-proc replicate {n1 n2 n3 crys per} {
+proc ::chitin::replicate {n1 n2 n3 crys per} {
     if {$n1*$n2*$n3*2>9999} {
 	error "to many residues! reduce x, y or z"
     }
+    global env
+    puts $env(CHITINDIR)
     if {$crys=="Alpha"} {
     
         # Input pdb with 4 molecules (double unit cell)
-        set unitCellPdb ./structures/alpha-4residues.pdb
+        set unitCellPdb $env(CHITINDIR)/structures/alpha-4residues.pdb
         # Output (create output file)
         set outPdb crystal-alpha.pdb
         # The dimensions of the unit cell are standard in l1 and l3 and double in l2
@@ -106,7 +108,7 @@ proc replicate {n1 n2 n3 crys per} {
         if {$crys=="Beta"} {
     
         # Input pdb with 4 molecules (double unit cell)
-        set unitCellPdb ./structures/beta-4residues.pdb
+        set unitCellPdb $env(CHITINDIR)/structures/beta-4residues.pdb
         # Output (create output file)
         set outPdb crystal-beta.pdb
         # The dimensions of the unit cell are standard in l1 and l3 and double in l2
@@ -167,14 +169,15 @@ proc replicate {n1 n2 n3 crys per} {
 	close $out
 	
     puts "The file $outPdb was written successfully."
-    psf_gen $n1 $n2 $n3 $crys $per
+    ::chitin::file_gen $n1 $n2 $n3 $crys $per
        
 }
 ##################################################################
 ##################################################################
 ##########PSF generation
-proc psf_gen {n1 n2 n3 crys1 per1} {
+proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
     resetpsf
+    global env
     if {$crys1=="Alpha"} {
 	#load replicated structure
 	mol new crystal-alpha.pdb 
@@ -214,7 +217,7 @@ proc psf_gen {n1 n2 n3 crys1 per1} {
 	}
 	mol delete top
 	#load topology file for psfgen
-	topology bGLC.top
+	topology $env(CHITINDIR)/bGLC.top
 	#The order of residues is complicated and maybe it is possible to fixed it in a better way.
 	#The order comes from the replicate code.
 	#The loops are over each pdb chain to apply patch (patch 14bb: glycosidic bond 1-4)
@@ -437,7 +440,7 @@ proc ::chitin::chitin_gui {} {
     
     grid [button $w.gobutton -text "Generate crystal" \
       -command [namespace code {
-        replicate "$xdim" "$ydim" "$zdim" "$crystal" "$perio"
+        ::chitin::replicate "$xdim" "$ydim" "$zdim" "$crystal" "$perio"
       } ]] -row $row -column 0 -columnspan 4 -sticky nsew
 
 }
