@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # chitin_builder
 Chitin builder plugin for VMD.
 
@@ -11,27 +10,6 @@ please cite:
 
 1) Download the code from the Download button in Github or by git clone
 
-2) In VMD, open the menu Extensions/VMD Preferences. In the CUSTOM tab add NEW by clicking the button on the left.
+2) Copy to the VMD tcl/plugin folder (example:your_path/vmd/plugins/noarch/tcl/chitin_builder) *Check your user privileges to copy the files in this directory
 
-__In Description add:__
-
-Chitin_builder
-
-__In Code add:__
-```
-lappend auto_path /path_to/your_downloaded_code
-
-menu main on
-
-package require chitin
-```
-3) Press the UPDATE button and also the WRITE SETTINGS TO VMDRC button, press yes if ask to overwrite.
-
-4) Close VMD and reopen it.
-
-Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
-=======
-# chitin_builder_v1.0
-
-Chitin builder plugin for VMD
->>>>>>> 3fd2a8866668cecc594ce21932ea06c2cf77e36c
+3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
