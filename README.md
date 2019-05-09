@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # chitin_builder
 Chitin builder plugin for VMD.
 
@@ -29,3 +30,8 @@ package require chitin
 4) Close VMD and reopen it.
 
 Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
+=======
+# chitin_builder_v1.0
+
+Chitin builder plugin for VMD
+>>>>>>> 3fd2a8866668cecc594ce21932ea06c2cf77e36c

@@ -93,6 +93,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
     
         # Input pdb with 4 molecules (double unit cell)
         set unitCellPdb $env(CHITINDIR)/structures/alpha-4residues.pdb
+
         # Output (create output file)
         set outPdb crystal-alpha.pdb
         # The dimensions of the unit cell are standard in l1 and l3 and double in l2
