@@ -2,6 +2,7 @@
 # Chitin builder gui
 #
 package require psfgen
+package require topotools
 package provide chitin 1.0
 
 namespace eval ::chitin:: {
@@ -307,7 +308,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	}
 	mol delete top
 	#load topology file for psfgen
-	topology bGLC.top
+	topology $env(CHITINDIR)/bGLC.top
 	#The order comes from the replicate code.
 	#The loops are over each pdb chain to apply patch (patch 14bb: glycosidic bond 1-4)
 	#Note that this require the index of two residues in specific order
@@ -337,6 +338,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	}
 	mol new crystal-beta-psf.psf
 	mol addfile crystal-beta-psf.pdb type pdb
+	#topo writevarxyz crystal-beta-xyz.xyz [atomselect top all]
     }
 }
 
