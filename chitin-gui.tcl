@@ -117,7 +117,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
         # because the pdb structure is duplicated in the l2 direction 
         # (4 molecules in pdb instead of 2 molecules in original unit cell)
 	set l1 9.638
-	set l2 19.276
+	set l2 18.478
 	set l3 10.384
 	set basisVector1 [list 1.0 0.0 0.0]
 	set basisVector2 [list 0.125 0.992 0.0]
@@ -281,8 +281,8 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	set mult [expr $n3*2]
 	#atnum is the number of atoms per chitin residue
 	set atnum 27
-	#chnum number of chitin chains (the cell contain 2 chains * a=8 * b=2 == 32)
-	set chnum [expr $n1*$n2*2]
+	#chnum number of chitin chains (the cell contain 2 chains * a=8 2 chains* b=2 == 32)
+	set chnum [expr 2*$n1*$n2*2]
 
 	#loop over the structure to fix resid necessary to apply patches
 	for {set i 0} {$i<$chnum} {incr i} {
