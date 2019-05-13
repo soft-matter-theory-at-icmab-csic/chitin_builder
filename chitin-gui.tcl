@@ -108,7 +108,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
         set unitCellPdb $env(CHITINDIR)/structures/alpha-4residues.pdb
 
         # Output (create output file)
-        set outPdb crystal-alpha.pdb
+        set outPdb crystal-alpha-temp.pdb
         # The dimensions of the unit cell are standard in l1 and l3 and double in l2
         # because the pdb structure is duplicated in the l2 direction 
         # (4 molecules in pdb instead of 2 molecules in original unit cell)
@@ -124,7 +124,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
         # Input pdb with 4 molecules (double unit cell)
         set unitCellPdb $env(CHITINDIR)/structures/beta-4residues.pdb
         # Output (create output file)
-        set outPdb crystal-beta.pdb
+        set outPdb crystal-beta-temp.pdb
         # The dimensions of the unit cell are standard in l1 and l3 and double in l2
         # because the pdb structure is duplicated in the l2 direction 
         # (4 molecules in pdb instead of 2 molecules in original unit cell)
@@ -194,7 +194,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
     global env
     if {$crys1=="Alpha"} {
 	#load replicated structure
-	mol new crystal-alpha.pdb 
+	mol new crystal-alpha-temp.pdb 
 	set idm [molinfo top get id]
 	#mult is the number of chitin residues per chain 
 	# 2*n3 
@@ -231,7 +231,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	}
 	mol delete top
 	#load topology file for psfgen
-	topology $env(CHITINDIR)/bGLC.top
+	topology $env(CHITINDIR)/structures/top_all36_carb.rtf
 	#The order of residues is complicated and maybe it is possible to fixed it in a better way.
 	#The order comes from the replicate code.
 	#The loops are over each pdb chain to apply patch (patch 14bb: glycosidic bond 1-4)
@@ -287,7 +287,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
     }
     if {$crys1=="Beta"} {
 	#load replicated structure
-	mol new crystal-beta.pdb
+	mol new crystal-beta-temp.pdb
 	set idm [molinfo top get id]
 	#mult is the number of chitin residues per chain (the cell contain 2 residues per chain * c=6 == 12)
 	set mult [expr $n3*2]
@@ -320,7 +320,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	}
 	mol delete top
 	#load topology file for psfgen
-	topology $env(CHITINDIR)/bGLC.top
+	topology $env(CHITINDIR)/structures/top_all36_carb.rtf
 	#The order comes from the replicate code.
 	#The loops are over each pdb chain to apply patch (patch 14bb: glycosidic bond 1-4)
 	#Note that this require the index of two residues in specific order

@@ -1,4 +1,4 @@
-* $Id: top_allxx_sugar.inp,v 1.98 2011-07-20 15:03:53 prabhu Exp $
+* $Id: top_all36_carb.rtf,v 1.2 2015/04/20 17:05:20 ryanmcgreevy Exp $
 *>>>>>>>>>>>> All-hydrogen topologies used in the <<<<<<<<<<<<<<<<
 *>>>>> development of the CHARMM carbohydrate  force field<<<<<<<<
 *>>>>>>>>>>>>>>>>>>>>>>>>> June 2009 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -44,18 +44,19 @@
 !Vanommeslaeghe, K.; Foster, T. J.; Jamison, F. W. and MacKerell, Jr., A.D.,
 !"CHARMM additive all-atom force field for carbohydrate derivatives and its
 !utility in polysaccharide and carbohydrate-protein modeling,"
-!Journal of Chemical Theory and Computation, (In Press, 2011), DOI: 10.1021/ct200328p
+!Journal of Chemical Theory and Computation 2011 7 (10), 3162-3180
 
 !O-glycan linkages
 !Mallajosyula, S. S. and MacKerell, Jr., A.D., "Influence of Solvent and
 !Intramolecular Hydrogen Bonding on the Conformational Properties of O-Linked
-!Glycopeptides," Journal of Physical Chemistry B, (In Press, 2011),
-!DOI: 10.1021/jp203695t
+!Glycopeptides,"
+!The Journal of Physical Chemistry B 2011 115 (38), 11215-11229.
 
 ! Phosphates and sulfates
-! Mallajosyula, S. S.; Guvench, O.; Hatcher, E. R. and MacKerell, Jr., A.D.,
-!"CHARMM Additive All-Atom Force Field for Phosphate and Sufate Linkages in
-!Carbohydrates" Manuscript under preparation, 2011
+! Mallajosyula, S. S.; Guvench, O; Hatcher E. R. and MacKerell, Jr., A.D.,
+! "CHARMM Additive All-Atom Force Field for Phosphate and Sulfate Linked to Carbohydrates"
+! Journal of Chemical Theory and Computation 2012 8 (2), 759-776.
+
 
 ! adm:   Alex MacKerell
 ! sng:   Shannon Greene
@@ -65,9 +66,12 @@
 ! sai:   Sairam S. Mallajosyula
 
 
-!Modified AGLCNA =AGNA
-!Modified BGLCNA =BGNA
-
+!
+!
+!Modified AGLCNA =AGNA for Chitin builder
+!Modified BGLCNA =BGNA for Chitin builder
+!
+!
 ! tip3p water
 !MASS     1 HCTIP3   1.00800  H ! TIP3P water hydrogen
 !MASS     2 OCTIP3  15.99940  O ! TIP3P water oxygen
@@ -1840,7 +1844,7 @@ IC   C2   C3   O3  HO3     1.5167  111.19   60.00  106.26   0.9641
 IC   C3   C4   O4  HO4     1.5102  111.43  -60.00  105.89   0.9645
 PATC  FIRS NONE LAST NONE
 
-RESI AGNA           0.000  ! 2-acetyl-2-deoxy-alpha-D-glucosamine
+RESI AGNA         0.000  ! 2-acetyl-2-deoxy-alpha-D-glucosamine
                            ! (alpha N-acetylglucosamine or GlcNAc)
 GROU                       !
 ATOM C1   CC3162    0.340  !                  O6-HO6
@@ -1922,7 +1926,7 @@ IC   O    C    CT   HT2    1.0000  120.00   60.00  120.00   1.0000
 IC   O    C    CT   HT3    1.0000  120.00  -60.00  120.00   1.0000
 PATC FIRS NONE LAST NONE
 
-RESI BGNA           0.000  ! 2-acetyl-2-deoxy-beta-D-glucosamine
+RESI BGNA         0.000  ! 2-acetyl-2-deoxy-beta-D-glucosamine
                            ! (beta N-acetylglucosamine or GlcNAc)
 GROU                       !
 ATOM C1   CC3162    0.340  !                  O6-HO6
@@ -2312,7 +2316,7 @@ BOND C7   H7        C6   O6        O7   HO7
 BOND C7   C8        C8   H8        C8   O8        O8   HO8
 BOND C8   C9        C9   H91       C9   H92       C9   O9        O9   HO9
 IMPR C CT N  O
-IMPR N C  C2 HN
+IMPR N C  C5 HN
 !    I    J    K    L      R(IK)   T(IKJ)    PHI   T(JKL)   R(KL)
 IC   C3   C2   C1   O11    1.5332  115.08  127.85  118.90   1.2820
 IC   O11  C2   *C1  O12    1.2820  118.90 -169.86  118.69   1.2783
@@ -2419,7 +2423,7 @@ BOND C7   H7        C6   O6        O7   HO7
 BOND C7   C8        C8   H8        C8   O8        O8   HO8
 BOND C8   C9        C9   H91       C9   H92       C9   O9        O9   HO9
 IMPR C CT N  O
-IMPR N C  C2 HN
+IMPR N C  C5 HN
 !    I    J    K    L      R(IK)   T(IKJ)    PHI   T(JKL)   R(KL)
 IC   C3   C2   C1   O11    1.5619  111.05   72.33  119.02   1.2616
 IC   O11  C2   *C1  O12    1.2616  119.02 -169.14  121.11   1.2984
@@ -4764,19 +4768,6 @@ IC O1   C2  *C1   H11  1.4392  113.93 -122.98  108.75    1.1018
 IC O1   C2  *C1   H12  1.4392  113.93  120.60  107.90    1.1015
 
 
-!! ions (from top_all22_prot.inp)
-
-! RESI SOD       1.00 ! Sodium Ion
-! GROUP
-! ATOM SOD  SOD  1.00
-! PATCHING FIRST NONE LAST NONE
-! 
-! RESI CAL       2.00 ! Calcium Ion
-! GROUP
-! ATOM CAL  CAL  2.00
-! PATCHING FIRST NONE LAST NONE
-
-
 !! PATCHES for the disaccharides !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ! diaxial 1<->1 linkage use for alpha,alpha(1<->1) trehalose
@@ -5463,11 +5454,11 @@ DELE ATOM HO3
 GROUP
 ATOM C13  CC3161   -0.09 ! 
 ATOM H3   HCA1      0.09 ! axial Hydrogen
-ATOM O3    OC30P   -0.40 ! 
+ATOM O3   OC30P    -0.40 ! 
 ATOM P3   PC        1.10 ! 
-ATOM OP32  OC2DP   -0.90 ! 
-ATOM OP33  OC2DP   -0.90 !                     C15
-ATOM OP34  OC2DP   -0.90 !                       \
+ATOM OP32 OC2DP    -0.90 ! 
+ATOM OP33 OC2DP    -0.90 !                     C15
+ATOM OP34 OC2DP    -0.90 !                       \
                          !                        C14      
                          !                        /       
                          !                       /        
@@ -5604,6 +5595,223 @@ IC  C16  C15  O5   P5         1.5323  109.44  -84.54  127.66   1.5968
 IC  C14  O5   P5   OP52       1.4102  127.66 -174.21  102.94   1.5071
 IC  O5   OP52 *P5  OP53       1.5968  102.94  113.03  118.81   1.5471
 IC  O5   OP52 *P5  OP54       1.5968  102.94 -113.60  109.37   1.4811
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! PATCHES for Sulphates by Sairam    !!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+PRES SUF1A         -0.80 ! Sulfate at alpha C1 position
+dele atom HO1
+
+GROUP
+ATOM C1   CC3162    0.01
+ATOM H1   HCA1      0.09
+ATOM O1   OC30P    -0.28
+ATOM S1   SC        1.33
+ATOM OS12 OC2DP    -0.65
+ATOM OS13 OC2DP    -0.65
+ATOM OS14 OC2DP    -0.65
+
+BOND O1  S1 OS12 S1 OS13 S1 OS14 S1
+
+IC   C5   O5   C1    O1         1.4305  111.50   63.93  108.22   1.4352
+IC   O5   O1   *C1   H1         1.5613  108.22 -116.76  114.09   1.1193
+IC   O5   C1   O1    S1         1.5613  108.22  131.56  117.57   1.5527
+IC   C1   O1   S1    OS12       1.4352  117.57  177.25  104.11   1.4504
+IC   O1   OS12 *S1   OS13       1.5527  104.11  112.40  113.72   1.4529
+IC   O1   OS12 *S1   OS14       1.5527  104.11 -114.18  114.03   1.4500
+
+PRES SUF1B         -0.80 ! Sulfate at beta C1 position 
+dele atom HO1
+
+GROUP
+ATOM C1   CC3162    0.01
+ATOM H1   HCA1      0.09
+ATOM O1   OC30P    -0.28
+ATOM S1   SC        1.33
+ATOM OS12 OC2DP    -0.65
+ATOM OS13 OC2DP    -0.65
+ATOM OS14 OC2DP    -0.65
+
+BOND O1  S1 OS12 S1 OS13 S1 OS14 S1
+
+IC   C5   O5   C1    O1         1.4305  111.50  174.93  108.22   1.4352
+IC   O5   O1   *C1   H1         1.5613  108.22  116.76  114.09   1.1193
+IC   O5   C1   O1    S1         1.5613  108.22  131.56  117.57   1.5527
+IC   C1   O1   S1    OS12       1.4352  117.57  177.25  104.11   1.4504
+IC   O1   OS12 *S1   OS13       1.5527  104.11  112.40  113.72   1.4529
+IC   O1   OS12 *S1   OS14       1.5527  104.11 -114.18  114.03   1.4500
+
+PRES SUF2A         -1.00 ! Sulfate at axial C2 position 
+dele atom HO2
+
+GROUP
+ATOM C2   CC3161   -0.19
+ATOM H2   HCA1      0.09
+ATOM O2   OC30P    -0.28
+ATOM S2   SC        1.33
+ATOM OS22 OC2DP    -0.65
+ATOM OS23 OC2DP    -0.65
+ATOM OS24 OC2DP    -0.65
+
+BOND O2  S2 OS22 S2 OS23 S2 OS24 S2
+
+IC   O5   C1   C2    O2         1.4305  111.50  -60.93  108.22   1.4352
+IC   C1   O2   *C2   H2         1.5613  108.22  116.76  114.09   1.1193
+IC   C1   C2   O2    S2         1.5613  108.22  131.56  117.57   1.5527
+IC   C2   O2   S2    OS22       1.4352  117.57  177.25  104.11   1.4504
+IC   O2   OS22 *S2   OS23       1.5527  104.11  112.40  113.72   1.4529
+IC   O2   OS22 *S2   OS24       1.5527  104.11 -114.18  114.03   1.4500
+
+PRES SUF2B         -1.00 ! Sulfate at equitorial C2 position
+dele atom HO2
+
+GROUP
+ATOM C2   CC3161   -0.19
+ATOM H2   HCA1      0.09
+ATOM O2   OC30P    -0.28
+ATOM S2   SC        1.33
+ATOM OS22 OC2DP    -0.65
+ATOM OS23 OC2DP    -0.65
+ATOM OS24 OC2DP    -0.65
+
+BOND O2  S2 OS22 S2 OS23 S2 OS24 S2
+
+IC   O5   C1   C2    O2         1.4305  111.50 -170.93  108.22   1.4352
+IC   C1   O2   *C2   H2         1.5613  108.22 -116.76  114.09   1.1193
+IC   C1   C2   O2    S2         1.5613  108.22  131.56  117.57   1.5527
+IC   C2   O2   S2    OS22       1.4352  117.57  177.25  104.11   1.4504
+IC   O2   OS22 *S2   OS23       1.5527  104.11  112.40  113.72   1.4529
+IC   O2   OS22 *S2   OS24       1.5527  104.11 -114.18  114.03   1.4500
+
+PRES SUF3A         -1.00 ! Sulfate at axial C3 position 
+dele atom HO3
+
+GROUP
+ATOM C3   CC3161   -0.19
+ATOM H3   HCA1      0.09
+ATOM O3   OC30P    -0.28
+ATOM S3   SC        1.33
+ATOM OS32 OC2DP    -0.65
+ATOM OS33 OC2DP    -0.65
+ATOM OS34 OC2DP    -0.65
+
+BOND O3  S3 OS32 S3 OS33 S3 OS34 S3
+
+IC   C1   C2   C3    O3         1.5413  114.47   71.07  109.68   1.4364
+IC   C2   O3   *C3   H3         1.5146  109.68 -119.48  114.05   1.1261
+IC   C2   C3   O3    S3         1.5146  109.68  125.46  115.96   1.5805
+IC   C3   O3   S3    OS32       1.4364  115.96  176.98  104.32   1.4471
+IC   O3   OS32 *S3   OS33       1.5805  104.32  111.57  114.64   1.4516
+IC   O3   OS32 *S3   OS34       1.5805  104.32 -111.89  114.79   1.4496
+
+PRES SUF3B         -1.00 ! Sulfate at equitorial C3 position
+dele atom HO3
+
+GROUP
+ATOM C3   CC3161   -0.19
+ATOM H3   HCA1      0.09
+ATOM O3   OC30P    -0.28
+ATOM S3   SC        1.33
+ATOM OS32 OC2DP    -0.65
+ATOM OS33 OC2DP    -0.65
+ATOM OS34 OC2DP    -0.65
+
+BOND O3  S3 OS32 S3 OS33 S3 OS34 S3
+
+IC   C1   C2   C3    O3         1.5397  112.35  179.14  111.07   1.4293
+IC   C2   O3   *C3   H3         1.5217  111.07  115.81  106.51   1.1190
+IC   C2   C3   O3    S3         1.5217  111.07   88.75  123.02   1.5789
+IC   C3   O3   S3    OS32       1.4293  123.02 -165.25  103.14   1.4482
+IC   O3   OS32 *S3   OS33       1.5789  103.14  111.60  114.04   1.4527
+IC   O3   OS32 *S3   OS34       1.5789  103.14 -114.44  114.19   1.4494
+
+
+PRES SUF4A         -1.00 ! Sulfate at axial C4 position
+dele atom HO4
+
+GROUP
+ATOM C4   CC3161   -0.19
+ATOM H4   HCA1      0.09
+ATOM O4   OC30P    -0.28
+ATOM S4   SC        1.33
+ATOM OS42 OC2DP    -0.65
+ATOM OS43 OC2DP    -0.65
+ATOM OS44 OC2DP    -0.65
+
+BOND O4  S4 OS42 S4 OS43 S4 OS44 S4
+
+IC   C2   C3   C4    O4         1.5156  110.32  -64.72  111.35   1.4312
+IC   C3   O4   *C4   H4         1.5118  111.35  122.25  113.81   1.1233
+IC   C3   C4   O4    S4         1.5118  111.35 -108.94  116.63   1.5860
+IC   C4   O4   S4    OS42       1.4312  116.63 -179.91  103.62   1.4478
+IC   O4   OS42 *S4   OS43       1.5860  103.62  111.53  114.38   1.4512
+IC   O4   OS42 *S4   OS44       1.5860  103.62 -113.15  114.60   1.4494
+
+
+PRES SUF4B         -1.00 ! Sulfate at equitorial C4 position
+dele atom HO4
+
+GROUP
+ATOM C4   CC3161   -0.19
+ATOM H4   HCA1      0.09
+ATOM O4   OC30P    -0.28
+ATOM S4   SC        1.33
+ATOM OS42 OC2DP    -0.65
+ATOM OS43 OC2DP    -0.65
+ATOM OS44 OC2DP    -0.65
+
+BOND O4  S4 OS42 S4 OS43 S4 OS44 S4
+
+IC   C2   C3   C4    O4         1.5146  109.17  170.97  110.74   1.4309
+IC   C3   O4   *C4   H4         1.5121  110.74 -123.52  114.80   1.1229
+IC   C3   C4   O4    S4         1.5121  110.74  110.03  115.71   1.5894
+IC   C4   O4   S4    OS42       1.4309  115.71 -178.78  103.74   1.4477
+IC   O4   OS42 *S4   OS43       1.5894  103.74  113.11  114.55   1.4496
+IC   O4   OS42 *S4   OS44       1.5894  103.74 -111.86  114.39   1.4516
+
+PRES SUF6          -1.00 ! Sulfate at C6 
+dele atom HO6
+
+GROUP
+ATOM C6   CC321    -0.28
+ATOM H61  HCA2      0.09
+ATOM H62  HCA2      0.09
+ATOM O6   OC30P    -0.28
+ATOM S6   SC        1.33
+ATOM OS62 OC2DP    -0.65
+ATOM OS63 OC2DP    -0.65
+ATOM OS64 OC2DP    -0.65
+
+BOND O6  S6 OS62 S6 OS63 S6 OS64 S6
+
+IC   O5   C5   C6    O6         1.4383  108.81   76.01  109.30   1.4275
+IC   C5   O6   *C6   H61        1.5222  109.30  120.33  111.18   1.1156
+IC   C5   O6   *C6   H62        1.5222  109.30 -118.94  111.25   1.1168
+IC   C5   C6   O6    S6         1.5222  109.30  169.79  115.83   1.5647
+IC   C6   O6   S6    OS62       1.4275  115.83  177.39  103.52   1.4539
+IC   O6   OS62 *S6   OS63       1.5647  103.52  114.97  113.22   1.4527
+IC   O6   OS62 *S6   OS64       1.5647  103.52 -113.66  112.94   1.4539
+
+
+!adapted from 16bb; used for linkage btw A-sialic acid and other carbohydrate; mjyang
+PRES sa26e         -0.08 ! (i)2->6(i-1) equatorial at C2 and equatorial at C6
+dele atom 1HO6
+dele atom 2HO2
+dele atom 2O2
+ATOM 1C6   CC321    0.00 !
+ATOM 1O6   OC301   -0.36 !
+ATOM 2C2   CC3062   0.28 !
+BOND 1O6 2C2
+!    I    J    K    L      R(IK)   T(IKJ)    PHI   T(JKL)   R(KL)
+IC   1C5  1C6  1O6   2C2        1.5616  106.87  168.41  113.93   1.3902 ! PSI
+IC   1C6  1O6  2C2   2O6        1.4311  113.73   51.33  111.43   1.4110 ! PHI
+IC   2O6  1O6  *2C2  2C3        1.4110  111.40  115.09   99.69   1.5316
+IC   2O6  1O6  *2C2  2C1        1.4110  111.43 -123.72  109.62   1.0837
+IC   1O6  2C2  2O6   2C6        1.3902  111.43  166.53  113.95   1.4709
+IC   1O6  2C2  2C3   2C4        1.3902   99.89 -170.57  112.29   1.4987
+
+
 
 END
 
