@@ -18,6 +18,8 @@ Linux (automatic)
 Make the file install.sh executable 
 From a terminal execute ./install.sh
 
+Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
+
 Note: The installation script assumes that VMD is localted in the default folder /usr/local/lib. You can modify this setting by editing the install.sh file with any editor of your choice.
 
 -------------------------------------------
@@ -28,8 +30,20 @@ Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains m
 Inside this tcl folder, create a new folder with the name chitin1.0
 
 2) Copy or move the chitin builder that you have downloaded to this new folder. You need superuser privileges.
-For example, in ubuntu you can open a terminal in the folder  
+For example, in ubuntu you can open a terminal in the folder 
 
-the VMD tcl/plugin folder (example:your_path/vmd/plugins/noarch/tcl/chitin_builder) *Check your user privileges to copy the files in this directory
+sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
+
+(this example above assumes that VMD is installed in the default folder /usr/local/lib/vmd/ )
 
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
+
+-------------------------------------------
+Windows
+
+(a completar por Jordi)
+
+-------------------------------------------
+MAC 
+
+(a completar por David)
