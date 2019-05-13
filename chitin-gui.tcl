@@ -2,6 +2,7 @@
 # Chitin builder gui
 #
 package require psfgen
+#package require pbctools
 package provide chitin 1.0
 
 namespace eval ::chitin:: {
@@ -17,7 +18,6 @@ namespace eval ::chitin:: {
     variable cvalue
     variable aangle
     variable bangle
-    variable gangle
     variable paper
     variable xv1
     variable xv2
@@ -31,7 +31,7 @@ namespace eval ::chitin:: {
 ##################################################
 ### Crystal replication procedures ###############
 # Return a list with atom positions.
-proc extractPdbCoords {pdbFile} {
+proc ::chitin::extractPdbCoords {pdbFile} {
 	set r {}
 	
 	# Get the coordinates from the pdb file.
@@ -50,7 +50,7 @@ proc extractPdbCoords {pdbFile} {
 }
 
 # Extract all atom records from a pdb file.
-proc extractPdbRecords {pdbFile} {
+proc ::chitin::extractPdbRecords {pdbFile} {
 	set in [open $pdbFile r]
 	
 	set pdbLine {}
@@ -65,7 +65,7 @@ proc extractPdbRecords {pdbFile} {
 }
 
 # Shift a list of vectors by a lattice vector.
-proc displaceCell {rUnitName i1 i2 i3 a1 a2 a3} {
+proc ::chitin::displaceCell {rUnitName i1 i2 i3 a1 a2 a3} {
 	upvar $rUnitName rUnit
 	# Compute the new lattice vector.
 	set rShift [vecadd [vecscale $i1 $a1] [vecscale $i2 $a2]]
@@ -79,7 +79,7 @@ proc displaceCell {rUnitName i1 i2 i3 a1 a2 a3} {
 }
 
 # Construct a pdb line from a template line, index, resId, and coordinates.
-proc makePdbLine {template index resId r} {
+proc ::chitin::makePdbLine {template index resId r} {
 	foreach {x y z} $r {break}
 	set record "ATOM  "
 	set si [string range [format "     %5i " $index] end-5 end]
@@ -97,6 +97,7 @@ proc makePdbLine {template index resId r} {
 
 # Build the crystal.
 proc ::chitin::replicate {n1 n2 n3 crys per} {
+    
     if {$n1*$n2*$n3*2>9999} {
 	error "to many residues! reduce x, y or z"
     }
@@ -182,9 +183,22 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
 	puts $out "END"
 	close $out
 	
-    puts "The file $outPdb was written successfully."
+
     ::chitin::file_gen $n1 $n2 $n3 $crys $per
-       
+
+    #Draw pbcbox
+
+
+    
+    puts "--------------------------------"
+    puts "Files crystal-????-psf.psf & crystal-????-psf.pdb"
+    puts "were written successfully"
+    puts "--------------------------------"
+    puts "Cell vectors:"
+    puts "$::chitin::xv1 $::chitin::xv2 $::chitin::xv2"
+    puts "$::chitin::yv1 $::chitin::yv2 $::chitin::xv2"
+    puts "$::chitin::xv2 $::chitin::xv2 $::chitin::zv3"
+    puts "--------------------------------"  
 }
 ##################################################################
 ##################################################################
@@ -275,6 +289,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    guesscoord
 	}
 	#final structure psf and pdb
+	#pbc set {$::chitin::avalue $::chitin::bvalue $::chitin::cvalue $::chitin::aangle $::chitin::aangle $::chitin::bangle} -vmd
 	writepsf crystal-alpha-psf.psf
 	writepdb crystal-alpha-psf.pdb
 	#remove intermediate files
@@ -284,6 +299,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	}
 	mol new crystal-alpha-psf.psf
 	mol addfile crystal-alpha-psf.pdb type pdb
+
     }
     if {$crys1=="Beta"} {
 	#load replicated structure
@@ -352,6 +368,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	mol addfile crystal-beta-psf.pdb type pdb
 	#topo writevarxyz crystal-beta-xyz.xyz [atomselect top all]
     }
+
 }
 
 
@@ -634,25 +651,25 @@ gamma =}
         -in $w -x 210 -y 400 -width 110 -relwidth 0 -height 18 \
 	    -relheight 0 -anchor nw -bordermode ignore
     place $w.lab78b \
-        -in $w -x 210 -y 430 -width 110 -relwidth 0 -height 18 \
+        -in $w -x 310 -y 400 -width 110 -relwidth 0 -height 18 \
 	    -relheight 0 -anchor nw -bordermode ignore
     place $w.lab78c \
-        -in $w -x 210 -y 460 -width 110 -relwidth 0 -height 18 \
+        -in $w -x 410 -y 400 -width 110 -relwidth 0 -height 18 \
         -relheight 0 -anchor nw -bordermode ignore 
     place $w.lab79 \
-        -in $w -x 310 -y 400 -width 110 -height 18 -anchor nw \
+        -in $w -x 210 -y 430 -width 110 -height 18 -anchor nw \
         -bordermode ignore 
     place $w.lab79b \
         -in $w -x 310 -y 430 -width 110 -height 18 -anchor nw \
         -bordermode ignore 
     place $w.lab79c \
-        -in $w -x 310 -y 460 -width 110 -height 18 -anchor nw \
+        -in $w -x 410 -y 430 -width 110 -height 18 -anchor nw \
         -bordermode ignore 
     place $w.lab80 \
-        -in $w -x 410 -y 400 -width 110 -height 18 -anchor nw \
+        -in $w -x 210 -y 460 -width 110 -height 18 -anchor nw \
 	    -bordermode ignore
     place $w.lab80b \
-        -in $w -x 410 -y 430 -width 110 -height 18 -anchor nw \
+        -in $w -x 310 -y 460 -width 110 -height 18 -anchor nw \
         -bordermode ignore 
     place $w.lab80c \
         -in $w -x 410 -y 460 -width 110 -height 18 -anchor nw \
@@ -661,11 +678,11 @@ gamma =}
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 	-highlightcolor black -text {Generate Chitin Structure}\
-	    -command { [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]; \
-			  set ::chitin::xv1 [expr $::chitin::avalue*$::chitin::xdim]; \
+	    -command {set ::chitin::xv1 [expr $::chitin::avalue*$::chitin::xdim]; \
 			  set ::chitin::yv1 [expr $::chitin::bv1*$::chitin::bvalue*$::chitin::ydim]; \
 			  set ::chitin::yv2 [expr $::chitin::bv2*$::chitin::bvalue*$::chitin::ydim]; \
-			   set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim] }
+			   set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
+		       [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]}
 
 	    
     #vTcl:DefineAlias "$w.but46" "Button1" #vTcl:WidgetProc "Toplevel1" 1
