@@ -13,8 +13,6 @@ echo "VMD assumed to be in the following folder: "
 ls $install_library_dir
 
 # Folder for chitin
-#echo 'hola'
-#chitinfolder= install_library_dir + '/vmd/plugins/noarch/tcl/chitin1.0/'
 echo "Creating Cellulose Builder folder"
 #mkdir $chitinfolder
 mkdir $install_library_dir/vmd/plugins/noarch/tcl/chitin1.0
