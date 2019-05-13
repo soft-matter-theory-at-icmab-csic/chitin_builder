@@ -2,7 +2,6 @@
 # Chitin builder gui
 #
 package require psfgen
-package require topotools
 package provide chitin 1.0
 
 namespace eval ::chitin:: {
@@ -22,13 +21,10 @@ namespace eval ::chitin:: {
     variable paper
     variable xv1
     variable xv2
-    variable xv3
     variable yv1
-    variable yv2
-    variable yv3
-    variable zv1
-    variable zv2
     variable zv3
+    variable bv1
+    variable bv2
     variable already_registered 0
 
 }
@@ -392,13 +388,11 @@ proc ::chitin::chitin_gui_new {} {
     variable paper
     variable xv1
     variable xv2
-    variable xv3
     variable yv1
     variable yv2
-    variable yv3
-    variable zv1
-    variable zv2
     variable zv3
+    variable bv1
+    variable bv2
     set ::chitin::crystal "Alpha"
     set ::chitin::xdim 1
     set ::chitin::ydim 1
@@ -410,16 +404,13 @@ proc ::chitin::chitin_gui_new {} {
     set ::chitin::aangle 90.0
     set ::chitin::bangle 90.0
     set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100–1105)"
-    set ::chitin::xv1 1.0
+    set ::chitin::xv1 0.0
     set ::chitin::xv2 0.0
-    set ::chitin::xv3 0.0 
     set ::chitin::yv1 0.0
-    set ::chitin::yv2 1.0
-    set ::chitin::yv3 0.0
-    set ::chitin::zv1 0.0
-    set ::chitin::zv2 0.0
-    set ::chitin::zv3 1.0
-    
+    set ::chitin::yv2 0.0
+    set ::chitin::zv3 0.0
+    set ::chitin::bv1 0.0
+    set ::chitin::bv2 1.0
     if { [winfo exists .chitin] } {
         wm deiconify $w
         return
@@ -456,7 +447,7 @@ proc ::chitin::chitin_gui_new {} {
      -command {tk_messageBox -type ok -title "About Chitin" \
      -message "Chitin builder tool by D C Malapina and J Faraudo. Institut de Ciencia de Materials de Barcelona (ICMAB-CSIC). please cite"}
      $w.fra43.help.menu add command -label "Documentation..." \
-     -command "vmd_open_url ..."
+     -command "vmd_open_url https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/src/master/ "
 
     #####Select crystal
 	    
@@ -468,20 +459,15 @@ proc ::chitin::chitin_gui_new {} {
      menu $w.crystalpick.menu -tearoff no
      $w.crystalpick.menu add command -label "Alpha" \
 	    -command {set ::chitin::crystal "Alpha"; set ::chitin::avalue 4.750; set ::chitin::bvalue 18.890; \
-			  set ::chitin::cvalue 10.333 ;set ::chitin::bangle 90.0; \
-			  set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100–1105)"; \
-			  set ::chitin::xv1 [expr 4.750*$::chitin::xdim]; set ::chitin::xv2 0.0; set ::chitin::xv3 0.0; \
-			  set ::chitin::yv1 0.0; set ::chitin::yv2 [expr 18.89*$::chitin::ydim]; set ::chitin::yv3 0.0; \
-			  set ::chitin::zv1 0.0; set ::chitin::zv2 0.0; set ::chitin::zv3 [expr 10.33*$::chitin::zdim]}
+			  set ::chitin::cvalue 10.333 ; set ::chitin::bangle 90.0 ; \
+			  set ::chitin::bv1 0.0 ; set ::chitin::bv2 1.0 ; \
+			  set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100–1105)"}
 #     incr row
      $w.crystalpick.menu add command -label "Beta" \
 	    -command {set ::chitin::crystal "Beta"; set ::chitin::avalue 4.819; set ::chitin::bvalue 9.239; \
 			  set ::chitin::cvalue 10.384; set ::chitin::bangle 97.16; \
-			  set ::chitin::paper "(Macromolecules, 2011, 44 (4), pp 950–957)     " ; \
-	    		  set ::chitin::xv1 [expr 4.819*$::chitin::xdim]; set ::chitin::xv2 0.0; set ::chitin::xv3 0.0; \
-			  set ::chitin::yv1 [expr 1.1548*$::chitin::ydim]; set ::chitin::yv2 [expr 9.165*$::chitin::ydim]; \
-			  set ::chitin::yv3 0.0; \
-			  set ::chitin::zv1 0.0; set ::chitin::zv2 0.0; set ::chitin::zv3 [expr 10.384*$::chitin::zdim]}
+			  set ::chitin::bv1 0.250 ; set ::chitin::bv2 1.984 ; \
+			  set ::chitin::paper "(Macromolecules, 2011, 44 (4), pp 950–957)     " }
 	    
 	    
 #     #Select periodic bonds
@@ -508,10 +494,10 @@ proc ::chitin::chitin_gui_new {} {
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -text {Unit cell:} 
     #vTcl:DefineAlias "$site_3_0.lab59" "Label3" #vTcl:WidgetProc "Toplevel1" 1
-    label $site_3_0.lab60 \
+    label $w.lab60 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-			 -highlightcolor black -text {Cell vectors to be generated [Angstrom]:} 
+			 -highlightcolor black -text {Cell vectors [Angstrom]:} 
     #vTcl:DefineAlias "$site_3_0.lab60" "Label4" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab61 \
         -activebackground {#f9f9f9} -activeforeground black \
@@ -573,109 +559,113 @@ gamma =}
         -highlightcolor black -justify left \
         -textvariable ::chitin::paper 
     #vTcl:DefineAlias "$site_3_0.lab77" "Label9" #vTcl:WidgetProc "Toplevel1" 1
-    label $site_3_0.lab78 \
+    label $w.lab78 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 			 -highlightcolor black -textvariable ::chitin::xv1
-    label $site_3_0.lab78b \
+    label $w.lab78b \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 			 -highlightcolor black -textvariable ::chitin::xv2
-    label $site_3_0.lab78c \
+    label $w.lab78c \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-	-highlightcolor black -textvariable ::chitin::xv3
+	-highlightcolor black -textvariable ::chitin::xv2
     #vTcl:DefineAlias "$site_3_0.lab78" "Label8_12" #vTcl:WidgetProc "Toplevel1" 1
-    label $site_3_0.lab79 \
+    label $w.lab79 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -textvariable ::chitin::yv1
-    label $site_3_0.lab79b \
+    label $w.lab79b \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 			 -highlightcolor black -textvariable ::chitin::yv2
-    label $site_3_0.lab79c \
+    label $w.lab79c \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -textvariable ::chitin::yv3
+        -highlightcolor black -textvariable ::chitin::xv2
 	    #vTcl:DefineAlias "$site_3_0.lab79" "Label8_13" #vTcl:WidgetProc "Toplevel1" 1
-    label $site_3_0.lab80 \
+    label $w.lab80 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -textvariable ::chitin::zv1
-    label $site_3_0.lab80b \
+        -highlightcolor black -textvariable ::chitin::xv2
+    label $w.lab80b \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -textvariable ::chitin::zv2
-    label $site_3_0.lab80c \
+        -highlightcolor black -textvariable ::chitin::xv2
+    label $w.lab80c \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -textvariable ::chitin::zv3
 	    #vTcl:DefineAlias "$site_3_0.lab80" "Label8_1" #vTcl:WidgetProc "Toplevel1" 1
     place $site_3_0.lab59 \
-        -in $site_3_0 -x 10 -y 10 -anchor nw -bordermode ignore 
-    place $site_3_0.lab60 \
-        -in $site_3_0 -x 10 -y 140 -width 198 -relwidth 0 -height 18 \
+        -in $site_3_0 -x 10 -y 5 -anchor nw -bordermode ignore 
+    place $w.lab60 \
+        -in $w -x 30 -y 380 -width 198 -relwidth 0 -height 18 \
         -relheight 0 -anchor nw -bordermode ignore 
     place $site_3_0.lab61 \
-        -in $site_3_0 -x 170 -y 10 -width 46 -relwidth 0 -height 76 \
+        -in $site_3_0 -x 140 -y 5 -width 46 -relwidth 0 -height 76 \
         -relheight 0 -anchor nw -bordermode ignore 
     place $site_3_0.lab64 \
         -in $site_3_0 -x 320 -y 10 -anchor nw -bordermode ignore 
     place $site_3_0.lab68 \
-        -in $site_3_0 -x 70 -y 100 -anchor nw -bordermode ignore 
+        -in $site_3_0 -x 100 -y 90 -anchor nw -bordermode ignore 
     place $site_3_0.lab70 \
-        -in $site_3_0 -x 220 -y 12 -anchor nw -bordermode ignore 
+        -in $site_3_0 -x 190 -y 12 -anchor nw -bordermode ignore 
     place $site_3_0.lab71 \
-        -in $site_3_0 -x 220 -y 35 -width 43 -relwidth 0 -height 28 \
+        -in $site_3_0 -x 180 -y 28 -width 43 -relwidth 0 -height 28 \
         -relheight 0 -anchor nw -bordermode ignore 
     place $site_3_0.lab72 \
-        -in $site_3_0 -x 220 -y 68 -width 43 -height 18 -anchor nw \
+        -in $site_3_0 -x 180 -y 58 -width 43 -height 18 -anchor nw \
         -bordermode ignore 
     place $site_3_0.lab73 \
-        -in $site_3_0 -x 400 -y 10 -width 43 -height 18 -anchor nw \
+        -in $site_3_0 -x 390 -y 7 -width 43 -height 18 -anchor nw \
         -bordermode ignore 
     place $site_3_0.lab74 \
-        -in $site_3_0 -x 400 -y 37 -width 43 -height 18 -anchor nw \
+        -in $site_3_0 -x 390 -y 31 -width 43 -height 18 -anchor nw \
         -bordermode ignore 
     place $site_3_0.lab75 \
-        -in $site_3_0 -x 400 -y 65 -width 43 -height 18 -anchor nw \
+        -in $site_3_0 -x 390 -y 55 -width 43 -height 18 -anchor nw \
         -bordermode ignore 
     place $site_3_0.lab77 \
-        -in $site_3_0 -x 220 -y 100 -width 321 -relwidth 0 -height 18 \
+        -in $site_3_0 -x 200 -y 90 -width 321 -relwidth 0 -height 18 \
         -relheight 0 -anchor nw -bordermode ignore 
-    place $site_3_0.lab78 \
-        -in $site_3_0 -x 210 -y 140 -width 110 -relwidth 0 -height 18 \
+    place $w.lab78 \
+        -in $w -x 210 -y 400 -width 110 -relwidth 0 -height 18 \
 	    -relheight 0 -anchor nw -bordermode ignore
-    place $site_3_0.lab78b \
-        -in $site_3_0 -x 320 -y 140 -width 110 -relwidth 0 -height 18 \
+    place $w.lab78b \
+        -in $w -x 210 -y 430 -width 110 -relwidth 0 -height 18 \
 	    -relheight 0 -anchor nw -bordermode ignore
-    place $site_3_0.lab78c \
-        -in $site_3_0 -x 430 -y 140 -width 110 -relwidth 0 -height 18 \
+    place $w.lab78c \
+        -in $w -x 210 -y 460 -width 110 -relwidth 0 -height 18 \
         -relheight 0 -anchor nw -bordermode ignore 
-    place $site_3_0.lab79 \
-        -in $site_3_0 -x 210 -y 160 -width 110 -height 18 -anchor nw \
+    place $w.lab79 \
+        -in $w -x 310 -y 400 -width 110 -height 18 -anchor nw \
         -bordermode ignore 
-    place $site_3_0.lab79b \
-        -in $site_3_0 -x 320 -y 160 -width 110 -height 18 -anchor nw \
+    place $w.lab79b \
+        -in $w -x 310 -y 430 -width 110 -height 18 -anchor nw \
         -bordermode ignore 
-    place $site_3_0.lab79c \
-        -in $site_3_0 -x 430 -y 160 -width 110 -height 18 -anchor nw \
+    place $w.lab79c \
+        -in $w -x 310 -y 460 -width 110 -height 18 -anchor nw \
         -bordermode ignore 
-    place $site_3_0.lab80 \
-        -in $site_3_0 -x 210 -y 180 -width 110 -height 18 -anchor nw \
+    place $w.lab80 \
+        -in $w -x 410 -y 400 -width 110 -height 18 -anchor nw \
 	    -bordermode ignore
-    place $site_3_0.lab80b \
-        -in $site_3_0 -x 320 -y 180 -width 110 -height 18 -anchor nw \
+    place $w.lab80b \
+        -in $w -x 410 -y 430 -width 110 -height 18 -anchor nw \
         -bordermode ignore 
-    place $site_3_0.lab80c \
-        -in $site_3_0 -x 430 -y 180 -width 110 -height 18 -anchor nw \
+    place $w.lab80c \
+        -in $w -x 410 -y 460 -width 110 -height 18 -anchor nw \
         -bordermode ignore 	    
     button $w.but46 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 	-highlightcolor black -text {Generate Chitin Structure}\
-	-command [namespace code {::chitin::replicate "$xdim" "$ydim" "$zdim" "$crystal" "$perio"}]
+	    -command { [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]; \
+			  set ::chitin::xv1 [expr $::chitin::avalue*$::chitin::xdim]; \
+			  set ::chitin::yv1 [expr $::chitin::bv1*$::chitin::bvalue*$::chitin::ydim]; \
+			  set ::chitin::yv2 [expr $::chitin::bv2*$::chitin::bvalue*$::chitin::ydim]; \
+			   set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim] }
 
 	    
     #vTcl:DefineAlias "$w.but46" "Button1" #vTcl:WidgetProc "Toplevel1" 1
@@ -688,19 +678,19 @@ gamma =}
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify left \
-        -text {Number of replications in x:} 
+        -text {Number of replicas in x:} 
     #vTcl:DefineAlias "$w.lab48" "Label2" #vTcl:WidgetProc "Toplevel1" 1
     label $w.lab49 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify left \
-        -text {Number of replications in z:} 
+        -text {Number of replicas in z:} 
     #vTcl:DefineAlias "$w.lab49" "Label2_1" #vTcl:WidgetProc "Toplevel1" 1
     label $w.lab50 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify left \
-        -text {Number of replications in y:} 
+        -text {Number of replicas in y:} 
     #vTcl:DefineAlias "$w.lab50" "Label2_2" #vTcl:WidgetProc "Toplevel1" 1
     entry $w.ent51 \
         -background white -font {-family {DejaVu Sans Mono} -size 10} \
@@ -730,38 +720,38 @@ gamma =}
     # SETTING GEOMETRY
     ###################
     place $w.fra45 \
-        -in $w -x 20 -y 190 -width 560 -relwidth 0 -height 205 -relheight 0 \
+        -in $w -x 20 -y 70 -width 560 -relwidth 0 -height 120 -relheight 0 \
         -anchor nw -bordermode ignore 
     place $w.but46 \
-        -in $w -x 20 -y 460 -width 560 -relwidth 0 -height 38 -relheight 0 \
+        -in $w -x 20 -y 320 -width 560 -relwidth 0 -height 38 -relheight 0 \
         -anchor nw -bordermode ignore 
     place $w.lab47 \
-        -in $w -x 110 -y 160 -width 166 -relwidth 0 -height 28 -relheight 0 \
+        -in $w -x 110 -y 40 -width 166 -relwidth 0 -height 28 -relheight 0 \
         -anchor nw -bordermode ignore 
     place $w.lab48 \
-        -in $w -x 100 -y 40 -width 170 -relwidth 0 -anchor nw \
+        -in $w -x 100 -y 200 -width 170 -relwidth 0 -anchor nw \
         -bordermode ignore 
     place $w.lab49 \
-        -in $w -x 100 -y 120 -width 170 -relwidth 0 -height 18 -relheight 0 \
+        -in $w -x 100 -y 260 -width 170 -relwidth 0 -height 18 -relheight 0 \
         -anchor nw -bordermode ignore 
     place $w.lab50 \
-        -in $w -x 100 -y 80 -width 170 -relwidth 0 -height 18 -relheight 0 \
+        -in $w -x 100 -y 230 -width 170 -relwidth 0 -height 18 -relheight 0 \
         -anchor nw -bordermode ignore 
     place $w.ent51 \
-        -in $w -x 290 -y 40 -anchor nw -bordermode ignore 
+        -in $w -x 300 -y 200 -anchor nw -bordermode ignore 
     place $w.ent52 \
-        -in $w -x 290 -y 80 -anchor nw -bordermode ignore 
+        -in $w -x 300 -y 230 -anchor nw -bordermode ignore 
     place $w.ent53 \
-        -in $w -x 290 -y 120 -anchor nw -bordermode ignore 
+        -in $w -x 300 -y 260 -anchor nw -bordermode ignore 
     place $w.lab43 \
-        -in $w -x 170 -y 400 -anchor nw -bordermode ignore 
+        -in $w -x 170 -y 290 -anchor nw -bordermode ignore 
     place $w.fra43 \
         -in $w -x -5 -y 0 -width 610 -relwidth 0 -height 30 -relheight 0 \
         -anchor nw -bordermode ignore 
     place $w.crystalpick \
-         -in $w -x 290 -y 160 -width 165 -anchor nw -bordermode ignore 
+         -in $w -x 290 -y 40 -width 165 -anchor nw -bordermode ignore 
     place $w.periopick \
-         -in $w -x 290 -y 400 -width 165 -anchor nw -bordermode ignore 
+         -in $w -x 290 -y 290 -width 165 -anchor nw -bordermode ignore 
 }
 
 
