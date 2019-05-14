@@ -191,10 +191,10 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
 
     
     puts "--------------------------------"
-    puts "Files crystal-????-psf.psf & crystal-????-psf.pdb"
+    puts "Files crystal-alpha-psf.psf/pdb or crystal-beta-psf.psf/pdb"
     puts "were written successfully"
     puts "--------------------------------"
-    puts "Cell vectors:"
+    puts "New cell vectors:"
     puts "$::chitin::xv1 $::chitin::xv2 $::chitin::xv2"
     puts "$::chitin::yv1 $::chitin::yv2 $::chitin::xv2"
     puts "$::chitin::xv2 $::chitin::xv2 $::chitin::zv3"
