@@ -25,6 +25,8 @@ namespace eval ::chitin:: {
     variable zv3
     variable bv1
     variable bv2
+    variable av1
+    variable bdim
     variable already_registered 0
 
 }
@@ -188,17 +190,25 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
 
     #Draw pbcbox
 
-
-    
+    puts "--------------------------------"
+    puts "--------------------------------"
+    puts "Chitin builder v1.0"
+    puts "by D C Malapina and J Faraudo. (ICMAB-CSIC)"
     puts "--------------------------------"
     puts "Files crystal-alpha-psf.psf/pdb or crystal-beta-psf.psf/pdb"
     puts "were written successfully"
     puts "--------------------------------"
-    puts "New cell vectors:"
-    puts "$::chitin::xv1 $::chitin::xv2 $::chitin::xv2"
-    puts "$::chitin::yv1 $::chitin::yv2 $::chitin::xv2"
-    puts "$::chitin::xv2 $::chitin::xv2 $::chitin::zv3"
-    puts "--------------------------------"  
+    puts "Cell vectors:"
+    puts "ai=$::chitin::xv1 aj=$::chitin::xv2 ak=$::chitin::xv2"
+    puts "bi=$::chitin::yv1 bj=$::chitin::yv2 bk=$::chitin::xv2"
+    puts "ci=$::chitin::xv2 cj=$::chitin::xv2 ck=$::chitin::zv3"
+    puts "--------------------------------"
+    puts "Cell dimensions:"
+    puts "--------------------------------"
+    puts "a=$::chitin::xv1 b=$::chitin::bdim c=$::chitin::zv3"
+    puts "alpha=90.0 beta=90.0 c=$::chitin::bangle"
+    puts "--------------------------------"
+    puts "--------------------------------"
 }
 ##################################################################
 ##################################################################
@@ -408,8 +418,10 @@ proc ::chitin::chitin_gui_new {} {
     variable yv1
     variable yv2
     variable zv3
+    variable av1
     variable bv1
     variable bv2
+    variable bdim
     set ::chitin::crystal "Alpha"
     set ::chitin::xdim 1
     set ::chitin::ydim 1
@@ -426,6 +438,7 @@ proc ::chitin::chitin_gui_new {} {
     set ::chitin::yv1 0.0
     set ::chitin::yv2 0.0
     set ::chitin::zv3 0.0
+    set ::chitin::av1 0.0
     set ::chitin::bv1 0.0
     set ::chitin::bv2 1.0
     if { [winfo exists .chitin] } {
@@ -478,12 +491,14 @@ proc ::chitin::chitin_gui_new {} {
 	    -command {set ::chitin::crystal "Alpha"; set ::chitin::avalue 4.750; set ::chitin::bvalue 18.890; \
 			  set ::chitin::cvalue 10.333 ; set ::chitin::bangle 90.0 ; \
 			  set ::chitin::bv1 0.0 ; set ::chitin::bv2 1.0 ; \
+			  set ::chitin::av1 1.0 ; \
 			  set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100–1105)"}
 #     incr row
      $w.crystalpick.menu add command -label "Beta" \
-	    -command {set ::chitin::crystal "Beta"; set ::chitin::avalue 4.819; set ::chitin::bvalue 9.239; \
+	    -command {set ::chitin::crystal "Beta"; set ::chitin::avalue 9.638; set ::chitin::bvalue 18.478; \
 			  set ::chitin::cvalue 10.384; set ::chitin::bangle 97.16; \
 			  set ::chitin::bv1 0.250 ; set ::chitin::bv2 1.984 ; \
+			  set ::chitin::av1 2.0 ; \
 			  set ::chitin::paper "(Macromolecules, 2011, 44 (4), pp 950–957)     " }
 	    
 	    
@@ -509,7 +524,7 @@ proc ::chitin::chitin_gui_new {} {
     label $site_3_0.lab59 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -text {Unit cell:} 
+        -highlightcolor black -text {Expanded unit cell:} 
     #vTcl:DefineAlias "$site_3_0.lab59" "Label3" #vTcl:WidgetProc "Toplevel1" 1
     label $w.lab60 \
         -activebackground {#f9f9f9} -activeforeground black \
@@ -678,10 +693,11 @@ gamma =}
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 	-highlightcolor black -text {Generate Chitin Structure}\
-	    -command {set ::chitin::xv1 [expr $::chitin::avalue*$::chitin::xdim]; \
+	    -command {set ::chitin::xv1 [expr $::chitin::av1*$::chitin::avalue*$::chitin::xdim]; \
 			  set ::chitin::yv1 [expr $::chitin::bv1*$::chitin::bvalue*$::chitin::ydim]; \
 			  set ::chitin::yv2 [expr $::chitin::bv2*$::chitin::bvalue*$::chitin::ydim]; \
-			   set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
+			  set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
+			  set ::chitin::bdim [expr $::chitin::bvalue*$::chitin::ydim]; \
 		       [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]}
 
 	    
@@ -695,19 +711,19 @@ gamma =}
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify left \
-        -text {Number of replicas in x:} 
+        -text {Number of replicas in a:} 
     #vTcl:DefineAlias "$w.lab48" "Label2" #vTcl:WidgetProc "Toplevel1" 1
     label $w.lab49 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify left \
-        -text {Number of replicas in z:} 
+        -text {Number of replicas in b:} 
     #vTcl:DefineAlias "$w.lab49" "Label2_1" #vTcl:WidgetProc "Toplevel1" 1
     label $w.lab50 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify left \
-        -text {Number of replicas in y:} 
+        -text {Number of replicas in c:} 
     #vTcl:DefineAlias "$w.lab50" "Label2_2" #vTcl:WidgetProc "Toplevel1" 1
     entry $w.ent51 \
         -background white -font {-family {DejaVu Sans Mono} -size 10} \
