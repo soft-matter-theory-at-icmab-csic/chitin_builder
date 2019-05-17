@@ -42,9 +42,28 @@ sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
 Windows (Manual installation)
 
 
+1) Locate the VMD application with Finder: 
+A typical location is /Applications/VMD
+
+Right click on the VMD application to open the option and click on "Show Package Contents"
+
+This will open a folder with all VMD installation.
+
+Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains many plugins written in tcl language.
+Inside this tcl folder, create a new folder with the name chitin1.0
+
+2) Copy or move the chitin builder files that you have downloaded to this new folder. 
+
+3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
+
+
+
+-------------------------------------------
+MAC (Manual installation)
+
 1) Locate the vmd folder in which the program VMD is installed. 
-A typical location is C:\Program Files (x86)\University of Illinois\VMD
-  
+A typical location is 
+
 Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains many plugins written in tcl language.
 Inside this tcl folder, create a new folder with the name chitin1.0
 
@@ -52,9 +71,3 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
 
-
-
--------------------------------------------
-MAC 
-
-(a completar por David)
