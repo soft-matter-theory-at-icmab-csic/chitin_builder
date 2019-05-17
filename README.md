@@ -60,8 +60,7 @@ MAC (Manual installation)
 
 A typical location is /Applications/VMD
 
-Right click on the VMD application to open the option and click on "Show Package Contents"
-This will open a folder with all VMD installation.
+Right click on the VMD application to open the options and click on "Show Package Contents", this will open a folder with all VMD installation.
 
 Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains many plugins written in tcl language.
 Inside this tcl folder, create a new folder with the name chitin1.0
