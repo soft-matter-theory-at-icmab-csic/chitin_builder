@@ -42,12 +42,8 @@ sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
 Windows (Manual installation)
 
 
-1) Locate the VMD application with Finder: 
-A typical location is /Applications/VMD
+1) Locate the vmd folder in which the program VMD is installed. By default is /usr/local/lib/vmd  
 
-Right click on the VMD application to open the option and click on "Show Package Contents"
-
-This will open a folder with all VMD installation.
 
 Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains many plugins written in tcl language.
 Inside this tcl folder, create a new folder with the name chitin1.0
@@ -61,8 +57,12 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 -------------------------------------------
 MAC (Manual installation)
 
-1) Locate the vmd folder in which the program VMD is installed. 
-A typical location is 
+1) Locate the VMD application using Finder
+
+A typical location is /Applications/VMD
+
+Right click on the VMD application to open the option and click on "Show Package Contents"
+This will open a folder with all VMD installation.
 
 Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains many plugins written in tcl language.
 Inside this tcl folder, create a new folder with the name chitin1.0
