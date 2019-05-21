@@ -256,9 +256,9 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    #each fragment is a chitin chain
 	    set sel1 [atomselect $idm "fragment $i"]
 	    #generates a pdb per each chain
-	    $sel1 writepdb fragment_$i.pdb
+	    $sel1 writepdb $::chitin::fname/fragment_$i.pdb
 	    #load the chain fragment
-	    mol new fragment_$i.pdb
+	    mol new $::chitin::fname/fragment_$i.pdb
 	    set tot [atomselect top all]
 	    #loop over each residue to fix resid
 	    #this loop employs the known number of atoms per resid which is atnum
@@ -270,9 +270,9 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 		$sel set resid $j
 	    }
 	    #generates a pdb of each fixed chain fragment
-	    $tot writepdb fragment_$i-r.pdb
+	    $tot writepdb $::chitin::fname/fragment_$i-r.pdb
 	    #rm fragment_$i.pdb
-	    file delete fragment_$i.pdb
+	    file delete $::chitin::fname/fragment_$i.pdb
 	    mol delete top
 	}
 	mol delete top
@@ -286,7 +286,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	#Even chain fragments have this order of residues:
 	# 1 0 3 2 .. 5 4 7 6 ... So require a loop for even and odd numbers
 	for {set j 0} {$j<$chnum} {incr j 2} {
-	    segment M$j {pdb fragment_$j-r.pdb}
+	    segment M$j {pdb $::chitin::fname/fragment_$j-r.pdb}
 	    #loop for even numbers
 	    for {set i 0} {$i<[expr $mult-1]} {incr i 2} {
 		patch 14bb M$j:$i M$j:[expr $i + 1]
@@ -299,7 +299,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    if {$per1=="yes"} {
 		patch 14bb M$j:1 M$j:[expr $mult-2]
 	    }
-	    coordpdb fragment_$j-r.pdb M$j
+	    coordpdb $::chitin::fname/fragment_$j-r.pdb M$j
 	    regenerate angles dihedrals
 	    guesscoord
 	}
@@ -307,7 +307,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	#Odd chain fragments have this order of residues:
 	# 0 1 2 3 ... so require only one loop
 	for {set j 1} {$j<$chnum} {incr j 2} {
-	    segment M$j {pdb fragment_$j-r.pdb}
+	    segment M$j {pdb $::chitin::fname/fragment_$j-r.pdb}
 	    #loop for odd and even numbers
 	    for {set i 0} {$i<[expr $mult-1]} {incr i} {
 		patch 14bb M$j:$i M$j:[expr $i + 1]
@@ -316,7 +316,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    if {$per1=="yes"} {
 		patch 14bb M$j:[expr $mult-1] M$j:0
 	    }
-	    coordpdb fragment_$j-r.pdb M$j
+	    coordpdb $::chitin::fname/fragment_$j-r.pdb M$j
 	    regenerate angles dihedrals
 	    guesscoord
 	}
@@ -349,9 +349,9 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    #each fragment is a chitin chain
 	    set sel1 [atomselect $idm "fragment $i"]
 	    #generates a pdb per each chain
-	    $sel1 writepdb fragment_$i.pdb
+	    $sel1 writepdb $::chitin::fname/fragment_$i.pdb
 	    #load the chain fragment
-	    mol new fragment_$i.pdb
+	    mol new $::chitin::fname/fragment_$i.pdb
 	    set tot [atomselect top all]
 	    #loop over each residue to fix resid
 	    for {set j 0} {$j<$mult} {incr j} {
@@ -361,9 +361,9 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 		$sel set resid $j
 	    }
 	    #generates a pdb of each fixed chain fragment
-	    $tot writepdb fragment_$i-r.pdb
+	    $tot writepdb $::chitin::fname/fragment_$i-r.pdb
 	    #rm fragment_$i.pdb
-	    file delete fragment_$i.pdb
+	    file delete $::chitin::fname/fragment_$i.pdb
 	    mol delete top
 	}
 	mol delete top
@@ -375,7 +375,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	#Chain fragments have this order of residues:
 	# 0 1 2 3 ... so require only one loop
 	for {set j 0} {$j<$chnum} {incr j} {
-	    segment M$j {pdb fragment_$j-r.pdb}
+	    segment M$j {pdb $::chitin::fname/fragment_$j-r.pdb}
 	    #loop for odd and even numbers
 	    for {set i 0} {$i<[expr $mult-1]} {incr i} {
 		patch 14bb M$j:[expr $i + 1] M$j:$i 
@@ -384,7 +384,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    if {$per1=="yes"} {
 		patch 14bb M$j:0 M$j:[expr $mult-1]
 	    }
-	    coordpdb fragment_$j-r.pdb M$j
+	    coordpdb $::chitin::fname/fragment_$j-r.pdb M$j
 	    regenerate angles dihedrals
 	    guesscoord
 	}
