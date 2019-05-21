@@ -2,7 +2,6 @@
 # Chitin builder gui
 #
 package require psfgen
-#package require pbctools
 package provide chitin 1.0
 
 namespace eval ::chitin:: {
@@ -27,6 +26,7 @@ namespace eval ::chitin:: {
     variable bv2
     variable av1
     variable bdim
+    variable fname
     variable already_registered 0
 
 }
@@ -111,7 +111,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
         set unitCellPdb $env(CHITINDIR)/structures/alpha-4residues.pdb
 
         # Output (create output file)
-        set outPdb crystal-alpha-temp.pdb
+        set outPdb $::chitin::fname/crystal-alpha-temp.pdb
         # The dimensions of the unit cell are standard in l1 and l3 and double in l2
         # because the pdb structure is duplicated in the l2 direction 
         # (4 molecules in pdb instead of 2 molecules in original unit cell)
@@ -127,7 +127,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
         # Input pdb with 4 molecules (double unit cell)
         set unitCellPdb $env(CHITINDIR)/structures/beta-4residues.pdb
         # Output (create output file)
-        set outPdb crystal-beta-temp.pdb
+        set outPdb $::chitin::fname/crystal-beta-temp.pdb
         # The dimensions of the unit cell are standard in l1 and l3 and double in l2
         # because the pdb structure is duplicated in the l2 direction 
         # (4 molecules in pdb instead of 2 molecules in original unit cell)
@@ -188,7 +188,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
 
     ::chitin::file_gen $n1 $n2 $n3 $crys $per
 
-    #Draw pbcbox
+    set logfile [open $::chitin::fname/crystal.log w]
 
     puts "--------------------------------"
     puts "--------------------------------"
@@ -196,7 +196,8 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
     puts "by D C Malapina and J Faraudo. (ICMAB-CSIC)"
     puts "--------------------------------"
     puts "Files crystal-alpha-psf.psf/pdb or crystal-beta-psf.psf/pdb"
-    puts "were written successfully"
+    puts "were written successfully in directory"
+    puts "$::chitin::fname"
     puts "--------------------------------"
     puts "Cell vectors:"
     puts "ai=$::chitin::xv1 aj=$::chitin::xv2 ak=$::chitin::xv2"
@@ -209,6 +210,27 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
     puts "alpha=90.0 beta=90.0 c=$::chitin::bangle"
     puts "--------------------------------"
     puts "--------------------------------"
+    puts $logfile "--------------------------------"
+    puts $logfile "--------------------------------"
+    puts $logfile "Chitin builder v1.0"
+    puts $logfile "by D C Malapina and J Faraudo. (ICMAB-CSIC)"
+    puts $logfile "--------------------------------"
+    puts $logfile "Files crystal-alpha-psf.psf/pdb or crystal-beta-psf.psf/pdb"
+    puts $logfile "were written successfully in directory:"
+    puts $logfile "$::chitin::fname"
+    puts $logfile "--------------------------------"
+    puts $logfile "Cell vectors:"
+    puts $logfile "ai=$::chitin::xv1 aj=$::chitin::xv2 ak=$::chitin::xv2"
+    puts $logfile "bi=$::chitin::yv1 bj=$::chitin::yv2 bk=$::chitin::xv2"
+    puts $logfile "ci=$::chitin::xv2 cj=$::chitin::xv2 ck=$::chitin::zv3"
+    puts $logfile "--------------------------------"
+    puts $logfile "Cell dimensions:"
+    puts $logfile "--------------------------------"
+    puts $logfile "a=$::chitin::xv1 b=$::chitin::bdim c=$::chitin::zv3"
+    puts $logfile "alpha=90.0 beta=90.0 c=$::chitin::bangle"
+    puts $logfile "--------------------------------"
+    puts $logfile "--------------------------------"
+    
 }
 ##################################################################
 ##################################################################
@@ -218,7 +240,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
     global env
     if {$crys1=="Alpha"} {
 	#load replicated structure
-	mol new crystal-alpha-temp.pdb 
+	mol new $::chitin::fname/crystal-alpha-temp.pdb 
 	set idm [molinfo top get id]
 	#mult is the number of chitin residues per chain 
 	# 2*n3 
@@ -300,20 +322,20 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	}
 	#final structure psf and pdb
 	#pbc set {$::chitin::avalue $::chitin::bvalue $::chitin::cvalue $::chitin::aangle $::chitin::aangle $::chitin::bangle} -vmd
-	writepsf crystal-alpha-psf.psf
-	writepdb crystal-alpha-psf.pdb
+	writepsf $::chitin::fname/crystal-alpha-psf.psf
+	writepdb $::chitin::fname/crystal-alpha-psf.pdb
 	#remove intermediate files
 	for {set i 0} {$i<$chnum} {incr i} {
 	    #    rm fragment_$i-r.pdb
-	    file delete fragment_$i-r.pdb
+	    file delete $::chitin::fname/fragment_$i-r.pdb
 	}
-	mol new crystal-alpha-psf.psf
-	mol addfile crystal-alpha-psf.pdb type pdb
+	mol new $::chitin::fname/crystal-alpha-psf.psf
+	mol addfile $::chitin::fname/crystal-alpha-psf.pdb type pdb
 
     }
     if {$crys1=="Beta"} {
 	#load replicated structure
-	mol new crystal-beta-temp.pdb
+	mol new $::chitin::fname/crystal-beta-temp.pdb
 	set idm [molinfo top get id]
 	#mult is the number of chitin residues per chain (the cell contain 2 residues per chain * c=6 == 12)
 	set mult [expr $n3*2]
@@ -367,15 +389,15 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    guesscoord
 	}
 	#final structure psf and pdb
-	writepsf crystal-beta-psf.psf
-	writepdb crystal-beta-psf.pdb
+	writepsf $::chitin::fname/crystal-beta-psf.psf
+	writepdb $::chitin::fname/crystal-beta-psf.pdb
 	#remove intermediate files
 	for {set i 0} {$i<$chnum} {incr i} {
 	    # rm fragment_$i-r.pdb
-	    file delete fragment_$i-r.pdb
+	    file delete $::chitin::fname/fragment_$i-r.pdb
 	}
-	mol new crystal-beta-psf.psf
-	mol addfile crystal-beta-psf.pdb type pdb
+	mol new $::chitin::fname/crystal-beta-psf.psf
+	mol addfile $::chitin::fname/crystal-beta-psf.pdb type pdb
 	#topo writevarxyz crystal-beta-xyz.xyz [atomselect top all]
     }
 
@@ -422,6 +444,7 @@ proc ::chitin::chitin_gui_new {} {
     variable bv1
     variable bv2
     variable bdim
+    variable fname
     set ::chitin::crystal "Alpha"
     set ::chitin::xdim 1
     set ::chitin::ydim 1
@@ -532,21 +555,35 @@ proc ::chitin::chitin_gui_new {} {
     label $site_3_0.lab61 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -text {a =
-
-b =
-
-c =} 
+			 -highlightcolor black -text {a =}
+    label $site_3_0.lab61b \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+			 -highlightcolor black -text {b =}
+    label $site_3_0.lab61c \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+			 -highlightcolor black -text {c =}	    
+	    
     #vTcl:DefineAlias "$site_3_0.lab61" "Label5" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab64 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify right \
-        -text {alpha =
-
-beta  =
-
-gamma =} 
+	    -text {alpha =}
+    #vTcl:DefineAlias "$site_3_0.lab61" "Label5" #vTcl:WidgetProc "Toplevel1" 1
+    label $site_3_0.lab64b \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+        -highlightcolor black -justify right \
+	    -text {beta =}
+    #vTcl:DefineAlias "$site_3_0.lab61" "Label5" #vTcl:WidgetProc "Toplevel1" 1
+    label $site_3_0.lab64c \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+        -highlightcolor black -justify right \
+	    -text {gamma =}		
+	    
     #vTcl:DefineAlias "$site_3_0.lab64" "Label6" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab68 \
         -activebackground {#f9f9f9} -activeforeground black \
@@ -634,19 +671,29 @@ gamma =}
         -in $w -x 30 -y 380 -width 198 -relwidth 0 -height 18 \
         -relheight 0 -anchor nw -bordermode ignore 
     place $site_3_0.lab61 \
-        -in $site_3_0 -x 140 -y 5 -width 46 -relwidth 0 -height 76 \
-        -relheight 0 -anchor nw -bordermode ignore 
+        -in $site_3_0 -x 140 -y 7 -width 43 -height 18 \
+	    -anchor nw -bordermode ignore
+    place $site_3_0.lab61b \
+        -in $site_3_0 -x 140 -y 31 -width 43 -height 18 \
+	    -anchor nw -bordermode ignore
+    place $site_3_0.lab61c \
+        -in $site_3_0 -x 140 -y 55 -width 43 -height 18 \
+	    -anchor nw -bordermode ignore
     place $site_3_0.lab64 \
-        -in $site_3_0 -x 320 -y 10 -anchor nw -bordermode ignore 
+	    -in $site_3_0 -x 320 -y 7 -width 43 -height 18 -anchor nw -bordermode ignore
+    place $site_3_0.lab64b \
+	    -in $site_3_0 -x 320 -y 31 -width 43 -height 18 -anchor nw -bordermode ignore
+    place $site_3_0.lab64c \
+        -in $site_3_0 -x 320 -y 55 -width 43 -height 18 -anchor nw -bordermode ignore 	    
     place $site_3_0.lab68 \
-        -in $site_3_0 -x 100 -y 90 -anchor nw -bordermode ignore 
+        -in $site_3_0 -x 10  -y 90 -anchor nw -bordermode ignore 
     place $site_3_0.lab70 \
-        -in $site_3_0 -x 190 -y 12 -anchor nw -bordermode ignore 
+        -in $site_3_0 -x 180 -y 7 -width 43 -height 18 -anchor nw -bordermode ignore 
     place $site_3_0.lab71 \
-        -in $site_3_0 -x 180 -y 28 -width 43 -relwidth 0 -height 28 \
+        -in $site_3_0 -x 180 -y 31 -width 43 -height 18 \
         -relheight 0 -anchor nw -bordermode ignore 
     place $site_3_0.lab72 \
-        -in $site_3_0 -x 180 -y 58 -width 43 -height 18 -anchor nw \
+        -in $site_3_0 -x 180 -y 55 -width 43 -height 18 -anchor nw \
         -bordermode ignore 
     place $site_3_0.lab73 \
         -in $site_3_0 -x 390 -y 7 -width 43 -height 18 -anchor nw \
@@ -696,6 +743,7 @@ gamma =}
 			  set ::chitin::yv2 [expr $::chitin::bv2*$::chitin::bvalue*$::chitin::ydim]; \
 			  set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
 			  set ::chitin::bdim [expr $::chitin::bvalue*$::chitin::ydim]; \
+			  set ::chitin::fname [tk_chooseDirectory]; \
 		       [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]}
 
 	    
