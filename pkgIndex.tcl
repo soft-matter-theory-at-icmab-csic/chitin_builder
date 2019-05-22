@@ -11,7 +11,7 @@
 
 package ifneeded chitin 1.0 "set env(CHITINDIR) [list $dir]; [list source [file join $dir chitin-gui.tcl]]"
 
-#to generate the menu, but returns an error
+#to generate the menu
 catch { package require chitin; chitin::register_menu; }
 
 
