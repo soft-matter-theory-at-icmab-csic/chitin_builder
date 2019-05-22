@@ -71,4 +71,18 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 # Usage
 
-![alt text](https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/src/master/examples/example-b-beta-2-2-4/beta-2-2-4.png)
+![alternativetext](https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/raw/f1780d7e3ec31d0a262bae2da99ec91a6b18a623/examples/example-b-beta-2-2-4/beta-2-2-4.png)
+
+The chitin builder gui allow the user to select between different option for the selection of the chitin crystal generation.
+
+Under crystal allomorph you can choose between alpha and beta chitin allomorphs.
+
+Data of the unit cell used for the generation of the new crystal would appear under crystal allomorph button.
+
+Below unit cell data, you can input the number of replicas that the new crystal structure is going to contain. This number should be an integer and the generated crystal have a limit of 9,999 chitin residues.
+
+If you choose the periodic bonds, a bond between the first residue and the last residue in each chain will be generated. This allow to create infinitely long chains if used with periodic boundary conditions.
+
+Finally the generate chitin structure button will prompt a dialog box for the destination folder and will generate a PDB + PSF file named: crystal-alpha-psf.pdb/psf or crystal-beta-psf.pdb/psf with the crystal structure and topology file.
+
+The data for the new crystal cell would be print under the generate structure button and the same data will be print on the file crystal.log
