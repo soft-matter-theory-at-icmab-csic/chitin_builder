@@ -13,7 +13,7 @@ Please download and unzip the code from the Download button in this GitBucket or
 To add the builder to the standard VMD extensions-modelling menu, please select the appropiate instructons depending on your OS:
 
 -----------------------------------------
-Ubuntu (automatic)
+**Ubuntu (automatic)**
 
 Make the file install.sh executable 
 From a terminal execute ./install.sh
@@ -23,7 +23,7 @@ Open VMD. Now you should have the Chitin_Builder menu installed under Extensions
 Note: The installation script assumes that VMD is localted in the default folder /usr/local/lib. You can modify this setting by editing the install.sh file with any editor of your choice.
 
 -------------------------------------------
-All Linux (Manual installation)
+**All Linux (Manual installation)**
 
 1) Locate the vmd folder in which the program VMD is installed. By default is /usr/local/lib/vmd  
 Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains many plugins written in tcl language.
@@ -39,7 +39,7 @@ sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
 
 -------------------------------------------
-Windows (Manual installation)
+**Windows (Manual installation)**
 
 1) Locate the vmd folder in which the program VMD is installed. 
 A typical location is C:\Program Files (x86)\University of Illinois\VMD
@@ -54,7 +54,7 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 
 -------------------------------------------
-MAC (Manual installation)
+**MAC (Manual installation)**
 
 1) Locate the VMD application using Finder
 
@@ -73,16 +73,16 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 ![alternativetext](https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/raw/f1780d7e3ec31d0a262bae2da99ec91a6b18a623/examples/example-b-beta-2-2-4/beta-2-2-4.png)
 
-The chitin builder gui allow the user to select between different option for the selection of the chitin crystal generation.
+The chitin builder gui allow the user to select between different options for the generation of a chitin crystal.
 
-Under crystal allomorph you can choose between alpha and beta chitin allomorphs.
+1) **Crystal allomorph button:** you can choose between alpha and beta chitin allomorphs.
 
 Data of the unit cell used for the generation of the new crystal would appear under crystal allomorph button.
 
-Below unit cell data, you can input the number of replicas that the new crystal structure is going to contain. This number should be an integer and the generated crystal have a limit of 9,999 chitin residues.
+2) **Number of replicas input:** you can enter the number of replicas that the new crystal structure is going to contain. This number should be an integer.
 
-If you choose the periodic bonds, a bond between the first residue and the last residue in each chain will be generated. This allow to create infinitely long chains if used with periodic boundary conditions.
+3) **Periodic bonds button:** if this option is set to "yes" a bond between the first residue and the last residue in each chain will be generated. This allow to create infinitely long chains if used with periodic boundary conditions.
 
-Finally the generate chitin structure button will prompt a dialog box for the destination folder and will generate a PDB + PSF file named: crystal-alpha-psf.pdb/psf or crystal-beta-psf.pdb/psf with the crystal structure and topology file.
+4) **Generate chitin structure button:** will prompt a dialog box for the destination folder and will generate a PDB + PSF file named: "crystal-alpha-psf.pdb / psf or crystal-beta-psf.pdb / psf" with the crystal structure and topology file.
 
-The data for the new crystal cell would be print under the generate structure button and the same data will be print on the file crystal.log
+The data for the new crystal cell would be print under the generate structure button and the same data will be print on the file "crystal.log".
