@@ -1,9 +1,16 @@
 #
-# Chitin builder gui
+# Chitin builder tool
+# Developed by D.C. Malaspina and J. Faraudo
+# ICMAB-CSIC
+# 2019
+# Distribution under GNL v3
 #
+
+#Required packages
 package require psfgen
 package provide chitin 1.0
 
+#Defining namespace
 namespace eval ::chitin:: {
     variable w
     variable crystal
@@ -30,9 +37,11 @@ namespace eval ::chitin:: {
     variable already_registered 0
 
 }
+
 ##################################################
 ### Crystal replication procedures ###############
-# Return a list with atom positions.
+
+# Return coordinates from PDB file.
 proc ::chitin::extractPdbCoords {pdbFile} {
 	set r {}
 	
@@ -97,7 +106,10 @@ proc ::chitin::makePdbLine {template index resId r} {
 	return "${record}${si}${temp0}${resId}${temp1}${sx}${sy}${sz}${tempEnd}"
 }
 
+########################################
 # Build the crystal.
+# This is the main procedure call by the gui
+########################################
 proc ::chitin::replicate {n1 n2 n3 crys per} {
     
     if {$n1*$n2*$n3*2>9999} {
@@ -107,14 +119,12 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
     puts $env(CHITINDIR)
     if {$crys=="Alpha"} {
     
-        # Input pdb with 4 molecules (double unit cell)
+        # Input pdb for alpha crystal
         set unitCellPdb $env(CHITINDIR)/structures/alpha-4residues.pdb
 
         # Output (create output file)
         set outPdb $::chitin::fname/crystal-alpha-temp.pdb
-        # The dimensions of the unit cell are standard in l1 and l3 and double in l2
-        # because the pdb structure is duplicated in the l2 direction 
-        # (4 molecules in pdb instead of 2 molecules in original unit cell)
+		# Unit cell vectors
         set l1 4.75
         set l2 18.890
         set l3 10.333
@@ -124,20 +134,19 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
     }
         if {$crys=="Beta"} {
     
-        # Input pdb with 4 molecules (double unit cell)
+        # Input pdb for beta crystal
         set unitCellPdb $env(CHITINDIR)/structures/beta-4residues.pdb
         # Output (create output file)
         set outPdb $::chitin::fname/crystal-beta-temp.pdb
-        # The dimensions of the unit cell are standard in l1 and l3 and double in l2
-        # because the pdb structure is duplicated in the l2 direction 
-        # (4 molecules in pdb instead of 2 molecules in original unit cell)
-	set l1 9.638
-	set l2 18.478
-	set l3 10.384
-	set basisVector1 [list 1.0 0.0 0.0]
-	set basisVector2 [list 0.125 0.992 0.0]
-	set basisVector3 [list 0.0 0.0 1.0]
+        # Unit cell vectors
+		set l1 9.638	
+		set l2 18.478
+		set l3 10.384
+		set basisVector1 [list 1.0 0.0 0.0]
+		set basisVector2 [list 0.125 0.992 0.0]
+		set basisVector3 [list 0.0 0.0 1.0]
     }
+	
 	set out [open $outPdb w]
 	puts $out "REMARK Unit cell dimensions:"
 	puts $out "REMARK a1 $l1" 
@@ -185,9 +194,11 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
 	puts $out "END"
 	close $out
 	
-
+	###########
+	#Call to the topology generation procedure
     ::chitin::file_gen $n1 $n2 $n3 $crys $per
 
+	#Log file output
     set logfile [open $::chitin::fname/crystal.log w]
 
     puts "--------------------------------"
@@ -233,8 +244,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
     
 }
 ##################################################################
-##################################################################
-##########PSF generation
+#Topology file generation procedure
 proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
     resetpsf
     global env
@@ -243,12 +253,10 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	mol new $::chitin::fname/crystal-alpha-temp.pdb 
 	set idm [molinfo top get id]
 	#mult is the number of chitin residues per chain 
-	# 2*n3 
 	set mult [expr $n3*2]
 	#atnum is the number of atoms per chitin residue that will be generated
 	set atnum 27
-	#chnum number of chitin chains (the cell contain 2 chains * n1 * n2 )
-
+	#chnum number of chitin chains
 	set chnum [expr 2*$n1*$n2]
 
 	#loop over the structure to fix resid necessary to apply patches
@@ -278,7 +286,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	mol delete top
 	#load topology file for psfgen
 	topology $env(CHITINDIR)/structures/top_all36_carb.rtf
-	#The order of residues is complicated and maybe it is possible to fixed it in a better way.
+	#The order of residues is complicated and maybe it is possible to do this in a better way.
 	#The order comes from the replicate code.
 	#The loops are over each pdb chain to apply patch (patch 14bb: glycosidic bond 1-4)
 	#Note that this require the index of two residues in specific order
@@ -337,11 +345,11 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	#load replicated structure
 	mol new $::chitin::fname/crystal-beta-temp.pdb
 	set idm [molinfo top get id]
-	#mult is the number of chitin residues per chain (the cell contain 2 residues per chain * c=6 == 12)
+	#mult is the number of chitin residues per chain 
 	set mult [expr $n3*2]
 	#atnum is the number of atoms per chitin residue
 	set atnum 27
-	#chnum number of chitin chains (the cell contain 2 chains * a=8 2 chains* b=2 == 32)
+	#chnum number of chitin chains
 	set chnum [expr 2*$n1*$n2*2]
 
 	#loop over the structure to fix resid necessary to apply patches
@@ -403,6 +411,9 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 
 }
 
+#################################
+# GENERATED GUI PROCEDURES
+#################################
 
 # Register menu if possible
 proc chitin::register_menu {} {
@@ -419,11 +430,10 @@ proc chitin_tk {} {
 
 }
 
-#################################
-# GENERATED GUI PROCEDURES
-#
+#Gui for VMD
 
 proc ::chitin::chitin_gui_new {} {
+#	Variable definition
     variable w
     variable crystal
     variable xdim
@@ -455,7 +465,7 @@ proc ::chitin::chitin_gui_new {} {
     set ::chitin::cvalue 10.333
     set ::chitin::aangle 90.0
     set ::chitin::bangle 90.0
-    set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100â€“1105)"
+    set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100–1105)"
     set ::chitin::xv1 0.0
     set ::chitin::xv2 0.0
     set ::chitin::yv1 0.0
@@ -464,6 +474,7 @@ proc ::chitin::chitin_gui_new {} {
     set ::chitin::av1 1.0
     set ::chitin::bv1 0.0
     set ::chitin::bv2 1.0
+	#
     if { [winfo exists .chitin] } {
         wm deiconify $w
         return
@@ -473,8 +484,7 @@ proc ::chitin::chitin_gui_new {} {
     ###################
     # CREATING WIDGETS
     ###################
-    #vTcl::widgets::core::toplevel::createCmd $top -class Toplevel \
-	#    -menu {} -background {#d9d9d9} -highlightcolor black 
+
     wm focusmodel $w passive
     wm geometry $w 600x509+498+302
     update
@@ -485,9 +495,9 @@ proc ::chitin::chitin_gui_new {} {
     wm resizable $w 1 1
     wm deiconify $w
     wm title $w "Chitin Builder v1.0"
-    
+	  
 
-    ####menu
+    ####Help menu
     frame $w.fra43 \
         -borderwidth 2 -relief groove -background {#d9d9d9} -height 35 \
         -width 610 
@@ -503,55 +513,50 @@ proc ::chitin::chitin_gui_new {} {
      -command "vmd_open_url https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/src/master/ "
 
     #####Select crystal
-	    
-
      menubutton $w.crystalpick -textvar ::chitin::crystal \
 	    -menu $w.crystalpick.menu -relief raised
-     #$w.crystalpick config -width 20
-#     -row $row -column 1 -columnspan 3 -sticky ew
      menu $w.crystalpick.menu -tearoff no
      $w.crystalpick.menu add command -label "Alpha" \
 	    -command {set ::chitin::crystal "Alpha"; set ::chitin::avalue 4.750; set ::chitin::bvalue 18.890; \
 			  set ::chitin::cvalue 10.333 ; set ::chitin::bangle 90.0 ; \
 			  set ::chitin::bv1 0.0 ; set ::chitin::bv2 1.0 ; \
-			  set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100â€“1105)"}
-#     incr row
+			  set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100–1105)"}
      $w.crystalpick.menu add command -label "Beta" \
 	    -command {set ::chitin::crystal "Beta"; set ::chitin::avalue 9.638; set ::chitin::bvalue 18.478; \
 			  set ::chitin::cvalue 10.384; set ::chitin::bangle 97.16; \
 			  set ::chitin::bv1 0.125 ; set ::chitin::bv2 0.992 ; \
-			  set ::chitin::paper "(Macromolecules, 2011, 44 (4), pp 950â€“957)     " }
+			  set ::chitin::paper "(Macromolecules, 2011, 44 (4), pp 950–957)     " }
+    label $w.lab47 \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+        -highlightcolor black -justify left -text {Chitin crystal allomorph:} 
+    #vTcl:DefineAlias "$w.lab47" "Label1" #vTcl:WidgetProc "Toplevel1" 1    
 	    
-	    
-#     #Select periodic bonds
-#     grid [label $w.periopicklab -text "Periodic bonds in topology: "] \
-#     -row $row -column 0 -sticky w
-	    #     grid [
+	#####Select periodic bonds
       menubutton $w.periopick -textvar ::chitin::perio \
 	    -menu $w.periopick.menu -relief raised
-#     -row $row -column 1 -columnspan 3 -sticky ew
       menu $w.periopick.menu -tearoff no
       $w.periopick.menu add command -label "yes" \
      -command {set ::chitin::perio "yes" }
      $w.periopick.menu add command -label "no" \
      -command {set ::chitin::perio "no"}
+	label $w.lab43 \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+        -highlightcolor black -text {Periodic bonds:} 
 
-    #vTcl:DefineAlias "$w" "Toplevel1" #vTcl:Toplevel:WidgetProc "" 1
+
+	####Frame with unit cell data
     frame $w.fra45 \
         -borderwidth 2 -relief groove -background {#d9d9d9} -height 225 \
         -highlightcolor black -width 560 
-    #vTcl:DefineAlias "$w.fra45" "Frame1" #vTcl:WidgetProc "Toplevel1" 1
+	
+	###### Labels of the unit cell data
     set site_3_0 $w.fra45
     label $site_3_0.lab59 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -text {Expanded unit cell:} 
-    #vTcl:DefineAlias "$site_3_0.lab59" "Label3" #vTcl:WidgetProc "Toplevel1" 1
-    label $w.lab60 \
-        -activebackground {#f9f9f9} -activeforeground black \
-        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-			 -highlightcolor black -text {Cell vectors [Angstrom]:} 
-    #vTcl:DefineAlias "$site_3_0.lab60" "Label4" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab61 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
@@ -564,68 +569,105 @@ proc ::chitin::chitin_gui_new {} {
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 			 -highlightcolor black -text {c =}	    
-	    
-    #vTcl:DefineAlias "$site_3_0.lab61" "Label5" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab64 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify right \
 	    -text {alpha =}
-    #vTcl:DefineAlias "$site_3_0.lab61" "Label5" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab64b \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify right \
 	    -text {beta =}
-    #vTcl:DefineAlias "$site_3_0.lab61" "Label5" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab64c \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify right \
 	    -text {gamma =}		
-	    
-    #vTcl:DefineAlias "$site_3_0.lab64" "Label6" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab68 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -text {Cell parameters from: } 
-    #vTcl:DefineAlias "$site_3_0.lab68" "Label7" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab70 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 	-highlightcolor black -textvariable ::chitin::avalue 
-    #vTcl:DefineAlias "$site_3_0.lab70" "Label8" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab71 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -textvariable ::chitin::bvalue 
-    #vTcl:DefineAlias "$site_3_0.lab71" "Label8_7" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab72 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -textvariable ::chitin::cvalue 
-    #vTcl:DefineAlias "$site_3_0.lab72" "Label8_8" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab73 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 	-highlightcolor black -textvariable ::chitin::aangle 
-    #vTcl:DefineAlias "$site_3_0.lab73" "Label8_9" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab74 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -textvariable ::chitin::aangle 
-    #vTcl:DefineAlias "$site_3_0.lab74" "Label8_10" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab75 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -textvariable ::chitin::bangle
-    #vTcl:DefineAlias "$site_3_0.lab75" "Label8_11" #vTcl:WidgetProc "Toplevel1" 1
     label $site_3_0.lab77 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -justify left \
         -textvariable ::chitin::paper 
-    #vTcl:DefineAlias "$site_3_0.lab77" "Label9" #vTcl:WidgetProc "Toplevel1" 1
+
+	##### Number of replicas data entry
+    label $w.lab48 \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+        -highlightcolor black -justify left \
+        -text {Number of replicas in a:} 
+    label $w.lab49 \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+        -highlightcolor black -justify left \
+        -text {Number of replicas in b:} 
+    label $w.lab50 \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+        -highlightcolor black -justify left \
+        -text {Number of replicas in c:} 
+    entry $w.ent51 \
+        -background white -font {-family {DejaVu Sans Mono} -size 10} \
+        -foreground {#000000} -highlightcolor black -insertbackground black \
+	-selectbackground {#c4c4c4} -selectforeground black  \
+	-textvariable ::chitin::xdim					
+    entry $w.ent52 \
+        -background white -font {-family {DejaVu Sans Mono} -size 10} \
+        -foreground {#000000} -highlightcolor black -insertbackground black \
+        -selectbackground {#c4c4c4} -selectforeground black \
+	-textvariable ::chitin::ydim					
+    entry $w.ent53 \
+        -background white -font {-family {DejaVu Sans Mono} -size 10} \
+        -foreground {#000000} -highlightcolor black -insertbackground black \
+        -selectbackground {#c4c4c4} -selectforeground black \
+	-textvariable ::chitin::zdim
+
+	###### Generate chitin crystal button	
+	button $w.but46 \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+	-highlightcolor black -text {Generate Chitin Structure}\
+	    -command {set ::chitin::xv1 [expr $::chitin::avalue*$::chitin::xdim]; \
+			  set ::chitin::yv1 [expr $::chitin::bv1*$::chitin::bvalue*$::chitin::ydim]; \
+			  set ::chitin::yv2 [expr $::chitin::bv2*$::chitin::bvalue*$::chitin::ydim]; \
+			  set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
+			  set ::chitin::bdim [expr $::chitin::bvalue*$::chitin::ydim]; \
+			  set ::chitin::fname [tk_chooseDirectory]; \
+		       [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]}
+
+	##### Labels of the generated cell data
+	label $w.lab60 \
+        -activebackground {#f9f9f9} -activeforeground black \
+        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
+			 -highlightcolor black -text {Cell vectors [Angstrom]:} 
     label $w.lab78 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
@@ -638,7 +680,6 @@ proc ::chitin::chitin_gui_new {} {
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 	-highlightcolor black -textvariable ::chitin::xv2
-    #vTcl:DefineAlias "$site_3_0.lab78" "Label8_12" #vTcl:WidgetProc "Toplevel1" 1
     label $w.lab79 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
@@ -651,7 +692,6 @@ proc ::chitin::chitin_gui_new {} {
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -textvariable ::chitin::xv2
-	    #vTcl:DefineAlias "$site_3_0.lab79" "Label8_13" #vTcl:WidgetProc "Toplevel1" 1
     label $w.lab80 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
@@ -664,8 +704,12 @@ proc ::chitin::chitin_gui_new {} {
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
         -highlightcolor black -textvariable ::chitin::zv3
-	    #vTcl:DefineAlias "$site_3_0.lab80" "Label8_1" #vTcl:WidgetProc "Toplevel1" 1
-    place $site_3_0.lab59 \
+
+
+    ###################
+    # SETTING PLACEMENT OF ELEMENTS
+    ###################
+	place $site_3_0.lab59 \
         -in $site_3_0 -x 10 -y 5 -anchor nw -bordermode ignore 
     place $w.lab60 \
         -in $w -x 30 -y 380 -width 198 -relwidth 0 -height 18 \
@@ -733,71 +777,10 @@ proc ::chitin::chitin_gui_new {} {
         -bordermode ignore 
     place $w.lab80c \
         -in $w -x 410 -y 460 -width 110 -height 18 -anchor nw \
-        -bordermode ignore 	    
-    button $w.but46 \
-        -activebackground {#f9f9f9} -activeforeground black \
-        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-	-highlightcolor black -text {Generate Chitin Structure}\
-	    -command {set ::chitin::xv1 [expr $::chitin::avalue*$::chitin::xdim]; \
-			  set ::chitin::yv1 [expr $::chitin::bv1*$::chitin::bvalue*$::chitin::ydim]; \
-			  set ::chitin::yv2 [expr $::chitin::bv2*$::chitin::bvalue*$::chitin::ydim]; \
-			  set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
-			  set ::chitin::bdim [expr $::chitin::bvalue*$::chitin::ydim]; \
-			  set ::chitin::fname [tk_chooseDirectory]; \
-		       [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]}
-
-	    
-    #vTcl:DefineAlias "$w.but46" "Button1" #vTcl:WidgetProc "Toplevel1" 1
-    label $w.lab47 \
-        -activebackground {#f9f9f9} -activeforeground black \
-        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -justify left -text {Chitin crystal allomorph:} 
-    #vTcl:DefineAlias "$w.lab47" "Label1" #vTcl:WidgetProc "Toplevel1" 1
-    label $w.lab48 \
-        -activebackground {#f9f9f9} -activeforeground black \
-        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -justify left \
-        -text {Number of replicas in a:} 
-    #vTcl:DefineAlias "$w.lab48" "Label2" #vTcl:WidgetProc "Toplevel1" 1
-    label $w.lab49 \
-        -activebackground {#f9f9f9} -activeforeground black \
-        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -justify left \
-        -text {Number of replicas in b:} 
-    #vTcl:DefineAlias "$w.lab49" "Label2_1" #vTcl:WidgetProc "Toplevel1" 1
-    label $w.lab50 \
-        -activebackground {#f9f9f9} -activeforeground black \
-        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -justify left \
-        -text {Number of replicas in c:} 
-    #vTcl:DefineAlias "$w.lab50" "Label2_2" #vTcl:WidgetProc "Toplevel1" 1
-    entry $w.ent51 \
-        -background white -font {-family {DejaVu Sans Mono} -size 10} \
-        -foreground {#000000} -highlightcolor black -insertbackground black \
-	-selectbackground {#c4c4c4} -selectforeground black  \
-	-textvariable ::chitin::xdim					
-    #vTcl:DefineAlias "$w.ent51" "Entry1" #vTcl:WidgetProc "Toplevel1" 1
-    entry $w.ent52 \
-        -background white -font {-family {DejaVu Sans Mono} -size 10} \
-        -foreground {#000000} -highlightcolor black -insertbackground black \
-        -selectbackground {#c4c4c4} -selectforeground black \
-	-textvariable ::chitin::ydim					
-    #vTcl:DefineAlias "$w.ent52" "Entry2" #vTcl:WidgetProc "Toplevel1" 1
-    entry $w.ent53 \
-        -background white -font {-family {DejaVu Sans Mono} -size 10} \
-        -foreground {#000000} -highlightcolor black -insertbackground black \
-        -selectbackground {#c4c4c4} -selectforeground black \
-	-textvariable ::chitin::zdim
-    #vTcl:DefineAlias "$w.ent53" "Entry3" #vTcl:WidgetProc "Toplevel1" 1
-    label $w.lab43 \
-        -activebackground {#f9f9f9} -activeforeground black \
-        -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
-        -highlightcolor black -text {Periodic bonds:} 
-    #vTcl:DefineAlias "$w.lab43" "Label10" #vTcl:WidgetProc "Toplevel1" 1
-
-    ###################
-    # SETTING GEOMETRY
-    ###################
+        -bordermode ignore 	
+		
+	################
+	
     place $w.fra45 \
         -in $w -x 20 -y 70 -width 560 -relwidth 0 -height 120 -relheight 0 \
         -anchor nw -bordermode ignore 
