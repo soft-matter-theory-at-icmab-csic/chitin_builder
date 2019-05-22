@@ -69,3 +69,6 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
 
+# Usage
+
+![alt text](https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/src/master/examples/example-b-beta-2-2-4/beta-2-2-4.png)
