@@ -37,7 +37,7 @@ Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains m
 Inside this tcl folder, create a new folder with the name chitin1.0
 
 2) Copy or move the chitin builder that you have downloaded to this new folder. You need superuser privileges.
-For example, in ubuntu you can open a terminal in the folder 
+For example, in ubuntu you can open a terminal inside the folder of the chitin buildir that you just extracted and type:
 
 sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
 
@@ -51,7 +51,7 @@ sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
 1) Locate the vmd folder in which the program VMD is installed. 
 A typical location is C:\Program Files (x86)\University of Illinois\VMD
 
-Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains many plugins written in tcl language.
+Inside the vmd folder, locate the folder /plugins/noarch/tcl/ that contains many plugins written in tcl language.
 Inside this tcl folder, create a new folder with the name chitin1.0
 
 2) Copy or move the chitin builder files that you have downloaded to this new folder. 
