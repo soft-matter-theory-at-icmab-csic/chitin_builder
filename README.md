@@ -13,6 +13,33 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 *D.C. Malaspina and J. Faraudo Comp. Phys. Comm. , submitted (2019)*
 
 -----------------------------------------
+## Files
+
+* chitin-gui.tcl: main code file in tcl language.
+
+* icon.png: image of a chitin monomer.
+
+* install.sh: bash script for installation under Linux.
+
+* LICENCE: GNU v3 licence file.
+
+* pkgIndex.tcl: subprogram in tcl for registering chitin builder into VMD menu.
+
+* /structures/alpha-4residues.pdb: initial structure for alpha chitin.
+
+* /structures/beta-4residues.pdb: initial structure for beta chitin.
+
+* /structure/top_all36_carb.rtf: CHARMM36 carbohydrate topology file for generating psf files.
+
+* /Forcefield/par_all36_carb.prm: CHARMM36 carbohydrate parameters file for running a simulation.
+
+* /examples/: several examples of generated structures using chitin builder. Each subfolder contains a screenshot of the input parameters and the output files.
+
+
+
+
+
+-----------------------------------------
 
 ## Installation
 
@@ -41,7 +68,7 @@ For example, in ubuntu you can open a terminal inside the folder of the chitin b
 
 sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
 
-(this example above assumes that VMD is installed in the default folder /usr/local/lib/vmd/ )
+(this example above assumes that VMD is installed in the default folder /usr/local/lib/vmd/)
 
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
 
