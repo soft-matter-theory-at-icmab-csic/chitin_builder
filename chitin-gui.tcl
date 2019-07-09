@@ -1,4 +1,4 @@
-#
+##
 # Chitin builder tool
 # Developed by D.C. Malaspina and J. Faraudo
 # ICMAB-CSIC
@@ -465,7 +465,7 @@ proc ::chitin::chitin_gui_new {} {
     set ::chitin::cvalue 10.333
     set ::chitin::aangle 90.0
     set ::chitin::bangle 90.0
-    set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100–1105)"
+    set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100Â–1105)"
     set ::chitin::xv1 0.0
     set ::chitin::xv2 0.0
     set ::chitin::yv1 0.0
@@ -520,12 +520,12 @@ proc ::chitin::chitin_gui_new {} {
 	    -command {set ::chitin::crystal "Alpha"; set ::chitin::avalue 4.750; set ::chitin::bvalue 18.890; \
 			  set ::chitin::cvalue 10.333 ; set ::chitin::bangle 90.0 ; \
 			  set ::chitin::bv1 0.0 ; set ::chitin::bv2 1.0 ; \
-			  set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100–1105)"}
+			  set ::chitin::paper "(Biomacromolecules, 2009, 10 (5), pp 1100Â–1105)"}
      $w.crystalpick.menu add command -label "Beta" \
 	    -command {set ::chitin::crystal "Beta"; set ::chitin::avalue 9.638; set ::chitin::bvalue 18.478; \
 			  set ::chitin::cvalue 10.384; set ::chitin::bangle 97.16; \
 			  set ::chitin::bv1 0.125 ; set ::chitin::bv2 0.992 ; \
-			  set ::chitin::paper "(Macromolecules, 2011, 44 (4), pp 950–957)     " }
+			  set ::chitin::paper "(Macromolecules, 2011, 44 (4), pp 950Â–957)     " }
     label $w.lab47 \
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
