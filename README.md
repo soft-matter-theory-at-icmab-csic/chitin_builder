@@ -43,7 +43,7 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 
 ## Installation
 
-Please download and unzip the code from the Download button in this GitBucket or clone by git clone.To 
+Please download and unzip the code from the Download button in this repository or clone by git clone.To 
 To add the builder to the standard VMD extensions-modelling menu, please select the appropiate instructons depending on your OS:
 
 -----------------------------------------
