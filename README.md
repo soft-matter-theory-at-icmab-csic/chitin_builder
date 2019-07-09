@@ -7,6 +7,8 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 
 ![alternativetext](icon.png)
 
+A detailed documentation with the methodology is provided on the file "chitin_builder_release_v1.0.pdf"
+
 ----------------------------------------------------------------
 ## Citation
 
@@ -17,13 +19,15 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 
 * chitin-gui.tcl: main code file in tcl language.
 
-* icon.png: image of a chitin monomer.
-
 * install.sh: bash script for installation under Linux.
+
+* chitin_builder_release_v1.0.pdf: Documentation.
 
 * LICENCE: GNU v3 licence file.
 
 * pkgIndex.tcl: subprogram in tcl for registering chitin builder into VMD menu.
+
+* icon.png: image of a chitin monomer.
 
 * /structures/alpha-4residues.pdb: initial structure for alpha chitin.
 
