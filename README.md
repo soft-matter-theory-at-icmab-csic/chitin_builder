@@ -10,7 +10,7 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 ----------------------------------------------------------------
 ## Citation
 
-*D.C. Malaspina and J. Faraudo Comp. Phys. Comm. , submitted (2019)*
+*D.C. Malaspina and J. Faraudo (2019)*
 
 -----------------------------------------
 ## Files
