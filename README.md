@@ -5,7 +5,7 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 
 [soft matter theory group - ICMAB-CSIC](https://departments.icmab.es/softmattertheory/)
 
-![alternativetext](https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/raw/98b1cb37c478179bbcb0a37fdbd08166f823cb61/icon.png)
+![alternativetext](icon.png)
 
 ----------------------------------------------------------------
 ## Citation
