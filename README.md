@@ -105,7 +105,7 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 ## Usage
 
-![alternativetext](https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/raw/f1780d7e3ec31d0a262bae2da99ec91a6b18a623/examples/example-b-beta-2-2-4/beta-2-2-4.png)
+![alternativetext](/examples/example-b-beta-2-2-4/beta-2-2-4.png)
 
 The chitin builder gui allow the user to select between different options for the generation of a chitin crystal.
 
