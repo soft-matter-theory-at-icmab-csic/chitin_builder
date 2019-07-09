@@ -12,7 +12,8 @@ A detailed documentation with the methodology is provided on the file "chitin_bu
 ----------------------------------------------------------------
 ## Citation
 
-*D.C. Malaspina and J. Faraudo (2019)*
+*D.C. Malaspina and J. Faraudo (2019)
+[![DOI](https://zenodo.org/badge/195977540.svg)](https://zenodo.org/badge/latestdoi/195977540)
 
 -----------------------------------------
 ## Files
