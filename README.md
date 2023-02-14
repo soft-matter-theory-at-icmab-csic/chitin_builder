@@ -7,6 +7,8 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 
 ![alternativetext](icon.png)
 
+It has been developed and tested in Linux and Mac machines. 
+It can be used in machines running Windows but compatilibity is not fully guaranteed.
 For detailed documentation with the methodology please go to the "documentation" folder.
 
 ----------------------------------------------------------------
@@ -24,7 +26,7 @@ For detailed documentation with the methodology please go to the "documentation"
 
 * chitin_builder_release_v1.0.pdf: Documentation.
 
-* LICENCE: GNU v3 licence file.
+* LICENCE: licence file, please read.
 
 * pkgIndex.tcl: subprogram in tcl for registering chitin builder into VMD menu.
 
@@ -76,22 +78,6 @@ sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
 (this example above assumes that VMD is installed in the default folder /usr/local/lib/vmd/)
 
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
-
--------------------------------------------
-* **Windows (Manual installation)**
-
-1) Locate the vmd folder in which the program VMD is installed. 
-A typical location is C:\Program Files (x86)\University of Illinois\VMD
-
-Inside the vmd folder, locate the folder /plugins/noarch/tcl/ that contains many plugins written in tcl language.
-Inside this tcl folder, create a new folder with the name chitin1.0
-
-2) Copy or move the chitin builder files that you have downloaded to this new folder. 
-
-3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
-
-
-
 -------------------------------------------
 * **MAC (Manual installation)**
 
@@ -107,6 +93,21 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 2) Copy or move the chitin builder that you have downloaded to this new folder. 
 
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
+-------------------------------------------
+* **Windows (Manual installation)**
+(WARNING: Compatibility with all versions of Windows is not guaranteed. We strongly suggest using this tool in Linux or Mac.)
+
+1) Locate the vmd folder in which the program VMD is installed. 
+A typical location is C:\Program Files (x86)\University of Illinois\VMD
+
+Inside the vmd folder, locate the folder /plugins/noarch/tcl/ that contains many plugins written in tcl language.
+Inside this tcl folder, create a new folder with the name chitin1.0
+
+2) Copy or move the chitin builder files that you have downloaded to this new folder. 
+
+3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
+
+
 
 ## Usage
 
