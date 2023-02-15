@@ -221,8 +221,8 @@ The repository includes installation instructions.
 
 # Acknowledgements
 
-We acknowledge financial support from the Spanish Government through the   RTI2018-096273-B-I00 grant and the “Severo Ochoa” Grant SEV-2015-0496 for Research Centres of Excellence awarded to ICMAB. 
-D.C. Malaspina is supported by the European Union's Horizon 2020 research and innovation programme under Marie Sklodowska-Curie grant agreement No 6655919. 
+We acknowledge financial support from the Spanish Government through the RTI2018-096273-B-I00 grant and the “Severo Ochoa” Grant CEX2019-000917-S  for Research Centres of Excellence awarded to ICMAB. We also thank the Government of Catalonia (AGAUR) for grant 2021SGR01519. 
+D.C. Malaspina was supported by the European Union's Horizon 2020 research and innovation programme under Marie Sklodowska-Curie grant agreement No 6655919. 
 We acknowledge discussions with Prof. Lars A. Berglund and Dr Yamila Garcia about chitin materials. 
 
 # References
