@@ -32,7 +32,7 @@ Crystal structures of any size with or without bonds in the periodic directions 
 The resulting structure is automatically saved in PDB and PSF format (used by well known simulation packages such as NAMD) and it can be easily converted to many other file formats using VMD build-in features.
 
 
-# Introduction
+# Introduction and Statement of Need
 
 \label{sec:Introduction}
 
