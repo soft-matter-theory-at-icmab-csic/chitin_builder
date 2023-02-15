@@ -36,10 +36,10 @@ The resulting structure is automatically saved in PDB and PSF format (used by we
 
 \label{sec:Introduction}
 
-Chitin is a polysaccharide present in the exoskeleton and internal structure of many invertebrates like molluscs, crustaceans, insects, fungus, algae, and other related organisms [@Dutta2002CHITINAPPLICATIONS,Zargar2015AApplications].
+Chitin is a polysaccharide present in the exoskeleton and internal structure of many invertebrates like molluscs, crustaceans, insects, fungus, algae, and other related organisms [@Dutta2002CHITINAPPLICATIONS; @Zargar2015AApplications].
 It is so prevalent in nature that it constitutes the second most abundant polymerized form of carbon in Earth.
 From the point of view of material sciences, chitin is biorenewable, environmentally friendly, biocompatible and biodegradable material.
-It has applications as a chelating agent, water treatment additive, drug carrier, biodegradable pressure‐sensitive adhesive tape, wound‐healing agents and many others [@Zargar2015AApplications,Shamshina2019AdvancesReview,RaviKumar2000AApplications]. 
+It has applications as a chelating agent, water treatment additive, drug carrier, biodegradable pressure‐sensitive adhesive tape, wound‐healing agents and many others [@Zargar2015AApplications; @Shamshina2019AdvancesReview; @RaviKumar2000AApplications]. 
 
 Chemically, chitin is a polysaccharide composed of repeated units of (1-4) N-acetyl-D-glucosamine (2-acetamido-2-deoxy-$\beta$-D-glucopyranose). 
 As other polysaccharides such as cellulose, chitin is usually found in crystal structures with several inter-chain hydrogen bonds that produce high order structures. 
@@ -68,13 +68,11 @@ Future developments of these plugin will incorporate the generation of crystal s
 \label{fgr:crystals}
 \end{figure}
 
-%% main text
-
 # Methods
 
 \label{sec:Methods}
 \subsection{Crystal structures of Chitin}
-%(Mention known crystal structures for chitin, their unit cell and their differences and how the program implements the replicas of the unit cell.)
+
 As we mentioned in the Introduction, there are three known chitin crystal allomorphs, $\alpha$, $\beta$ and $\gamma$ chitin.
 However, we will not consider $\gamma$ chitin since its structure is not well known and in fact it is sometimes considered as a mixture of $\alpha$ and $\beta$ chitin [@Jang2004PhysicochemicalResources; @Kaya2017On-chitin; @Ramirez-Wong2016Sustainable-solvent-inducedFilms].
 The crystal structures of $\alpha$ and $\beta$ chitin allomorphs are shown in Figure \ref{fgr:crystals}.
@@ -96,10 +94,7 @@ An important feature determined in experiments is the presence of deacetylated g
 In our program, we will consider pure chitin so we do not consider the presence of deacetylated groups in the structures.
 This possibility is too complex to be incorporated in our program at the present time until further modelling studies clarify a realistic way to incorporate this chemical feature.
 
-%Due to its complex structure and attractive properties there are there several studies on new applications of chitin based materials [@Shamshina2019AdvancesReview]. Although, from the molecular point of view there are several open questions in relation to chitin structure and its interactions with other molecules. 
-
-
-Generation of coordinates and topology of crystals
+\subsection{Generation of coordinates and topology of crystals}
 
 The program generates atomic coordinates of $\alpha$ and $\beta$ chitin crystals with dimensions entered by the user.
 The dimensions of the crystal must be a multiple of the unit cell shown in Figure \ref{fgr:crystals}a for $\alpha$ chitin and in Figure \ref{fgr:crystals}b for $\beta$ chitin crystals.
@@ -124,7 +119,7 @@ Each chitin residue in each chain is linked by the "14bb" patch in the topology 
  
 # Program description, use and features
 
-Brief description of the program
+\subsection{Brief description of the program}
 
 The code is a plugin for VMD written in tcl/tk v8.4 programming language.
 The source code contains two main parts: the code that obtains the atomic coordinates of the atoms of the crystal and the structure and topology of the crystal (see Methods section) and a code responsible for the  graphical user interface (gui).
@@ -133,7 +128,7 @@ These output files are named crystal-alpha-psf.pdb/psf or crystal-beta-psf.pdb/p
 This two files, plus the included CHARMM36 parameters file (located in the /ForceField/ folder) allows the user to easily start a molecular dynamics simulation using the NAMD simulation program [@Phillips2005ScalableNAMD] that accompanies VMD.
 Also, using VMD, the users can easily export the data from these two files (PDB and PSF) to other coordinates formats or convert the topology to the formats required by other programs such as GROMACS [@VanDerSpoel2005GROMACS:Free,Hess2008GROMACSSimulation] using the topotools plugin included in VMD. 
 
-Installation
+\subsection{Installation}
 
 As we mentioned before the code is a plugin for VMD. 
 In the Readme.md file we detailed the installation process.
@@ -142,7 +137,7 @@ Usually administrator privileges are needed to copy into the VMD installation fo
 Also note that the specific location at which VMD is installed vary depending on the operating system and the user VMD installation preferences, as explained in VMD documentation.
 We also included a bash script that performs an automatic installation for Ubuntu Linux system.
 
-Graphical user interface
+\subsection{Graphical user interface}
 %The gui code was partially created using PAGE: Python Automatic GUI Generator v4.22 by Don Rozenberg. 
 All the options of our plugin are controlled from a graphical user interface (GUI), shown in figure \ref{fgr:guisections}.
 This GUI allows the user to switch between the different options for the chitin crystal generation (Figure \ref{fgr:guisections}). 
