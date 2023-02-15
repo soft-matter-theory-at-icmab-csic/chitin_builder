@@ -46,6 +46,12 @@ As other polysaccharides such as cellulose, chitin is usually found in crystal s
 There are three known crystal allomorphs [@Jang2004PhysicochemicalResources]: $\alpha$, $\beta$ and $\gamma$ chitin.
 The crystal structures of $\alpha$ and $\beta$ chitin (the most abundant allomorphs) are known [@Sikorski2009Revisit; @Nishiyama2011Xray] but the structure of the rare $\gamma$ chitin alomorph is still under debate [@Jang2004PhysicochemicalResources; @Kaya2017On-chitin; @Ramirez-Wong2016Sustainable-solvent-inducedFilms].
 
+\begin{figure}[ht]
+\includegraphics[width=0.9\columnwidth]{alpha-beta.png}
+\caption{Structure of chitin crystal allomorphs $\alpha$ and $\beta$.   a) $\alpha$ chitin primitive unit cell. b) $\beta$ chitin expanded unit cell (corresponding to 2 primitive unit cells). c) scheme of the antiparallel organization of the chains in $\alpha$ chitin, indicated by arrows over a crystal generated with the input for the number of replicas $a$=1 $b$=2 $c$=3. d) scheme of the parallel chain organization in $\beta$ chitin, indicated by arrows over a crystal generated with the input for the number of replicas $a$=1 $b$=2 $c$=3 (note that an extra plane of molecules is below the image in this case). Chitin molecules are shown in bond representation in all cases (O in red, H in white, N in blue and H in white). Figure made with VMD. [@Humphrey1996VMD:Dynamics].}
+\label{fgr:crystals}
+\end{figure}
+
 The knowledge of the crystal structures of chitin with atomistic resolution is important from both a fundamental and practical point of view, since it opens the possibility to predict the properties of chitin based materials and derivatives (mechanical, thermal, interaction with solvents,...) from the knowledge of its molecular structure.
 Starting from the atomic coordinates provided by crystal structures, it is possible to perform Molecular Dynamics (MD) simulations of chitin and study its properties and its interactions with other materials.
 However, up to date, there are only a few works that deal with all-atomic MD simulations of chitin  [@Yu2017Flexibility; @McDonnell2016MolecularFilms; @Strelcova2016TheSimulations; @Jin2013MechanicalStudy].
@@ -61,12 +67,6 @@ In this work we present a chitin builder tool implemented as a VMD plugin, that 
 
 This plugin will greatly facilitate the process of generation of input files (coordinates, structures, topology) for atomistic simulations and we expect that it will fuel the use of these techniques in the study of these materials. 
 Future developments of these plugin will incorporate the generation of crystal structures of other polymeric crystals.
-
-\begin{figure}[ht]
-\includegraphics[width=0.9\columnwidth]{alpha-beta.png}
-\caption{Structure of chitin crystal allomorphs $\alpha$ and $\beta$.   a) $\alpha$ chitin primitive unit cell. b) $\beta$ chitin expanded unit cell (corresponding to 2 primitive unit cells). c) scheme of the antiparallel organization of the chains in $\alpha$ chitin, indicated by arrows over a crystal generated with the input for the number of replicas $a$=1 $b$=2 $c$=3. d) scheme of the parallel chain organization in $\beta$ chitin, indicated by arrows over a crystal generated with the input for the number of replicas $a$=1 $b$=2 $c$=3 (note that an extra plane of molecules is below the image in this case). Chitin molecules are shown in bond representation in all cases (O in red, H in white, N in blue and H in white). Figure made with VMD. [@Humphrey1996VMD:Dynamics].}
-\label{fgr:crystals}
-\end{figure}
 
 # Methods
 
