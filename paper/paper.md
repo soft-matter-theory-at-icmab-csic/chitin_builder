@@ -29,3 +29,9 @@ Here we present an analogous tool for Chitin, the Chitin Builder tool, a program
 The program generates cartesian coordinates and atomic connectivity and structure files for crystalline structures of chitin polymorphs $\alpha$ and $\beta$.
 Crystal structures of any size with or without bonds in the periodic directions can be easily build.
 The resulting structure is automatically saved in PDB and PSF format (used by well known simulation packages such as NAMD) and it can be easily converted to many other file formats using VMD build-in features.
+
+# Acknowledgements
+
+Financial suport.
+
+# References
