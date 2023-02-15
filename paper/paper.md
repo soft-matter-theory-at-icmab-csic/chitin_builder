@@ -214,9 +214,10 @@ Note that this structure is twice the size of \ref{fgr:examples}b) in the $b$ di
 This structure is located in the folder /examples/example-f-beta-2-4-4/.
 
 # Compatibility and distribution
-The chitin builder tool is written in tcl/tk as VMD plugin; it will therefore work on any of the platforms supported by the VMD program (Linux, OSX, Windows).
+The chitin builder tool is written in tcl/tk as VMD plugin so in principle it should work on any of the platforms supported by the VMD program. 
+We tested it on Linux and Mac systems and it works flawlessly. Some tests on Windows were also satisfactory but some users of the 1.0 version reported problems related to specific Windows versions, so use of this plugin in OS different from Windows is encouraged.
 The latest version of the package can be obtained from the GitHub repository.
-The repository includes installation instructions for different platforms.
+The repository includes installation instructions.
 
 # Acknowledgements
 
