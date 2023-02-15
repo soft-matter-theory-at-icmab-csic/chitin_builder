@@ -29,7 +29,9 @@ The program generates cartesian coordinates and atomic connectivity and structur
 Crystal structures of any size with or without bonds in the periodic directions can be easily build.
 The resulting structure is automatically saved in PDB and PSF format (used by well known simulation packages such as NAMD) and it can be easily converted to many other file formats using VMD build-in features.
 
-#Introduction
+
+# Introduction
+
 \label{sec:Introduction}
 
 Chitin is a polysaccharide present in the exoskeleton and internal structure of many invertebrates like molluscs, crustaceans, insects, fungus, algae, and other related organisms \cite{Dutta2002CHITINAPPLICATIONS,Zargar2015AApplications}.
@@ -65,7 +67,9 @@ Future developments of these plugin will incorporate the generation of crystal s
 \end{figure}
 
 %% main text
-#Methods
+
+# Methods
+
 \label{sec:Methods}
 \subsection{Crystal structures of Chitin}
 %(Mention known crystal structures for chitin, their unit cell and their differences and how the program implements the replicas of the unit cell.)
@@ -116,7 +120,7 @@ Each chitin residue in each chain is linked by the "14bb" patch in the topology 
  The generated pdb and psf files are finally saved into the working folder and are ready to be employed in force field MD simulations.
  For completeness, we also provide a parameters file ("par\_all36\_carb.prm" in the ForceField folder) with CHARMM36 carbohydrate standard Lennard-Jones, bonds, angles and dihedrals sections of the CHARMM36 force field needed for the simulation. 
  
-#Program description, use and features
+# Program description, use and features
 
 Brief description of the program
 
@@ -171,7 +175,7 @@ This useful data is also printed on the main console and on the log file.
 \label{fgr:guisections}
 \end{figure}
 
-#Examples
+# Examples
 
 Using the chitin builder plugin we have generated several structures as is displayed in Figure \ref{fgr:examples}.
 All the generated structures (PDB + PSF files) are included in the /examples/ folder as well as a screen capture of the gui that generated the respective structure.
@@ -221,6 +225,8 @@ The repository includes installation instructions for different platforms.
 
 # Acknowledgements
 
-Financial support.
+We acknowledge financial support from the Spanish Government through the   RTI2018-096273-B-I00 grant and the “Severo Ochoa” Grant SEV-2015-0496 for Research Centres of Excellence awarded to ICMAB. 
+D.C. Malaspina is supported by the European Union's Horizon 2020 research and innovation programme under Marie Sklodowska-Curie grant agreement No 6655919. 
+We acknowledge discussions with Prof. Lars A. Berglund and Dr Yamila Garcia about chitin materials. 
 
 # References
