@@ -124,7 +124,7 @@ The source code contains two main parts: the code that obtains the atomic coordi
 The program generates two main outputs: a coordinate file (PDB) containing the position of all the atoms in the generated structure and a topology file (PSF) containing all the bonds, angles and dihedrals according to CHARMM36 carbohydrate section [@Guvench2011CHARMMModeling].
 These output files are named crystal-alpha-psf.pdb/psf or crystal-beta-psf.pdb/psf depending on the allomorph, and are stored in the working folder choosen by the user. 
 This two files, plus the included CHARMM36 parameters file (located in the /ForceField/ folder) allows the user to easily start a molecular dynamics simulation using the NAMD simulation program [@Phillips2005ScalableNAMD] that accompanies VMD.
-Also, using VMD, the users can easily export the data from these two files (PDB and PSF) to other coordinates formats or convert the topology to the formats required by other programs such as GROMACS [@VanDerSpoel2005GROMACS:Free, @Hess2008GROMACSSimulation] using the topotools plugin included in VMD. 
+Also, using VMD, the users can easily export the data from these two files (PDB and PSF) to other coordinates formats or convert the topology to the formats required by other programs such as GROMACS [@VanDerSpoel2005GROMACS:Free; @Hess2008GROMACSSimulation] using the topotools plugin included in VMD. 
 
 \subsection{Installation}
 
@@ -142,6 +142,12 @@ This GUI allows the user to switch between the different options for the chitin 
 It also provides a quick view to the unit cell data as well as the cell vectors describing the generated crystal, to be employed in a MD simulation.  
 
 In Figure \ref{fgr:guisections}, we also indicate the different sections of the GUI which are the following:
+
+\begin{figure}[ht]
+\includegraphics[width=0.9\columnwidth]{gui-screenshot-sections.png}
+\caption{Chitin builder graphical user interface sections}
+\label{fgr:guisections}
+\end{figure}
 
 Section 1) of the gui correspond to the "help" menu.
 It contains two items: "About", that contains information of the developers and "Documentation", that redirects the user to the Bitbucket repository code webpage where a Readme.md file explains the main features of the code. 
@@ -163,12 +169,6 @@ Finally, section 4) of the gui displays the cell data of the generated chitin st
 The first row correspond to the 3 cartesian components (i, j, k) of the $a$ vector of the cell, second row correspond to the 3 components of the $b$ vector of the cell and third row to the 3 components of the $c$ vector of the cell. 
 This data is provided in this format so the user can use it directly in a  configuration file for a MD simulation (as in a simulation with NAMD for example).
 This useful data is also printed on the main console and on the log file.
-
-\begin{figure}[ht]
-\includegraphics[width=0.9\columnwidth]{gui-screenshot-sections.png}
-\caption{Chitin builder graphical user interface sections}
-\label{fgr:guisections}
-\end{figure}
 
 # Examples
 
