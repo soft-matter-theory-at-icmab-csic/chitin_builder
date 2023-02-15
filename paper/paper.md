@@ -33,6 +33,6 @@ The resulting structure is automatically saved in PDB and PSF format (used by we
 
 # Acknowledgements
 
-Financial suport.
+Financial support.
 
 # References
