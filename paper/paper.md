@@ -2,23 +2,17 @@
 title: 'Chitin Builder: a VMD tool for the generation of structures of chitin molecular crystals for atomistic simulations'
 tags:
   - VMD
-  - tcl
-  - Molecular Dynamics
-  - Chitin polymer
+  - diffusion coefficient
+  - molecular dynamics
+  - trajectory
 authors:
-  - name: David C. Malaspina
-    orcid: 0000-0002-6315-4993
+  - name: David Malaspina
+    orcid: 0000-0001-6449-0596
     affiliation: 1
-- name: Jordi Faraudo
-    orcid: 0000-0002-6315-4993
-    corresponding: true # (This is how to denote the corresponding author)
-    affiliation: 2
 affiliations:
- - name: Tarragona, Spain
+ - name: Institute of Biophysics (IBF-CNR), National Research Council of Italy
    index: 1
- - name: ICMAB-CSIC,Campus UAB Bellaterra, Barcelona, Spain
-   index: 2
-date: 15 February 2023
+date: 15 August 2019
 bibliography: paper.bib
 ---
 
