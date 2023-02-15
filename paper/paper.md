@@ -10,7 +10,8 @@ authors:
     orcid: 0000-0001-6449-0596
     affiliation: 1
   - name: Jordi Faraudo
-    orcid: 0000-0001-6449-0596
+    orcid: 0000-0002-6315-4993
+    corresponding: true # (This is how to denote the corresponding author)
     affiliation: 1
 affiliations:
  - name: ICMAB-CSIC,Campus UAB Bellaterra, Barcelona, Spain
