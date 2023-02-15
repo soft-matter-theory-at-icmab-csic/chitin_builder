@@ -9,6 +9,9 @@ authors:
   - name: David Malaspina
     orcid: 0000-0001-6449-0596
     affiliation: 1
+  - name: Jordi Faraudo
+    orcid: 0000-0001-6449-0596
+    affiliation: 1
 affiliations:
  - name: ICMAB-CSIC,Campus UAB Bellaterra, Barcelona, Spain
    index: 1
