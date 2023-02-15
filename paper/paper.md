@@ -7,9 +7,10 @@ tags:
   - Chitin polymer
 authors:
 - name: David C. Malaspina
-    orcid: 0000-0000-0000-0000
+    orcid: 0000-0002-6315-4993
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
 - name: Jordi Faraudo
+    orcid: 0000-0002-6315-4993
     corresponding: true # (This is how to denote the corresponding author)
     affiliation: 2
 affiliations:
