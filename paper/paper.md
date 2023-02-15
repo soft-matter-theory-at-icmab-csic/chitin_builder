@@ -6,7 +6,7 @@ tags:
   - Molecular Dynamics
   - Chitin polymer
 authors:
-- name: David C Malaspina
+- name: David Malaspina
     orcid: 0000-0002-6315-4993
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
 - name: Jordi Faraudo
