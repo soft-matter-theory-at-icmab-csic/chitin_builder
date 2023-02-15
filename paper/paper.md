@@ -136,7 +136,7 @@ Also note that the specific location at which VMD is installed vary depending on
 We also included a bash script that performs an automatic installation for Ubuntu Linux system.
 
 \subsection{Graphical user interface}
-%The gui code was partially created using PAGE: Python Automatic GUI Generator v4.22 by Don Rozenberg. 
+ 
 All the options of our plugin are controlled from a graphical user interface (GUI), shown in figure \ref{fgr:guisections}.
 This GUI allows the user to switch between the different options for the chitin crystal generation (Figure \ref{fgr:guisections}). 
 It also provides a quick view to the unit cell data as well as the cell vectors describing the generated crystal, to be employed in a MD simulation.  
