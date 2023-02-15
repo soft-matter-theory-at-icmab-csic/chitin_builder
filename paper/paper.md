@@ -63,7 +63,7 @@ We think that one possible reason for this difference is the availability of a c
 Since these materials are complex materials, the build up of the files required for the simulations is not a trivial task. 
 It is clear that the existence of tools that facilitate the build up of appropriate files for atomistic simulation of polymeric organic crystals will fuel the use of simulation techniques for the understanding of these important materials.
 
-In this work we present a chitin builder tool implemented as a plugin of the Visual Molecular Dynamics (VMD) program [@Humphrey1996VMD:Dynamics]. The pugin produces files containing atomic coordinates and all the topology information of pure $\alpha$ and $\beta$ chitin crystals of arbitrary size.
+In this work we present a chitin builder tool implemented as a plugin of the Visual Molecular Dynamics (VMD) program [@Humphrey1996VMD:Dynamics]. The pugin produces files in PDB and PSF format containing atomic coordinates and topology information of pure $\alpha$ and $\beta$ chitin crystals of arbitrary size.
 
 This plugin will greatly facilitate the process of generation of input files (coordinates, structures, topology) for atomistic simulations and we expect that it will fuel the use of these techniques in the study of these materials. 
 Future developments of these plugin will incorporate the generation of crystal structures of other polymeric crystals.
