@@ -53,7 +53,7 @@ These studies explore important practical questions such as the interaction of c
 
 The lack of atomistic simulations of chitin, is even more surprising when we compare this situation with the case of cellulose, which is the other most abundant polysaccharide. 
 In the case of cellulose, there are many atomistic simulation works, deriving the most diverse features of cellulose from the known crystal structure [@Malaspina2019MolecularNanocrystals].
-We think that one possible reason for this difference is the availability of a cellulose builder tool [@Gomes2012Cellulose-Builder; @Cellulose] that allows an easy build up of atomistic configurations and structure/topology files that can be used for MD simulations.
+We think that one possible reason for this difference is the availability of a cellulose builder tool [@Gomes2012Cellulose-Builder:Cellulose] that allows an easy build up of atomistic configurations and structure/topology files that can be used for MD simulations.
 Since these materials are complex materials, the build up of the files required for the simulations is not a trivial task. 
 It is clear that the existence of tools that facilitate the build up of appropriate files for atomistic simulation of polymeric organic crystals will fuel the use of simulation techniques for the understanding of these important materials.
 
