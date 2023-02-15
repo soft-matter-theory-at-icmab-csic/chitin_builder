@@ -1,4 +1,4 @@
-
+---
 title: 'Chitin Builder: a VMD tool for the generation of structures of chitin molecular crystals for atomistic simulations'
 tags:
   - VMD
@@ -19,6 +19,7 @@ affiliations:
    index: 2
 date: 15 February 2023
 bibliography: paper.bib
+---
 
 # Summary
 Chitin is the second most abundant organic material in nature after cellulose and its study is now of great interest in the field of biocompatible and eco-friendly materials. 
