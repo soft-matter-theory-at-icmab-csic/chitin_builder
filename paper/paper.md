@@ -14,7 +14,7 @@ authors:
     corresponding: true # (This is how to denote the corresponding author)
     affiliation: 1
 affiliations:
- - name: ICMAB-CSIC,Campus UAB Bellaterra, Barcelona, Spain
+ - name: Institut de Ciencia de Materials de Barcelona (ICMAB-CSIC),Campus UAB Bellaterra, Barcelona, Spain
    index: 1
  - name: Fundacio Universitat Rovira i Virgili, Av. dels Paisos Catalans 18, 43007, Tarragona, Spain
    index: 2
