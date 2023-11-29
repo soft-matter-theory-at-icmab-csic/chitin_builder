@@ -510,7 +510,7 @@ proc ::chitin::chitin_gui_new {} {
      -command {tk_messageBox -type ok -title "About Chitin" \
      -message "Chitin builder tool by D C Malapina and J Faraudo. Institut de Ciencia de Materials de Barcelona (ICMAB-CSIC). please cite"}
      $w.fra43.help.menu add command -label "Documentation..." \
-     -command "vmd_open_url https://bitbucket.org/icmab_soft_matter_theory/chitin_builder_gui/src/master/ "
+     -command "vmd_open_url https://github.com/soft-matter-theory-at-icmab-csic/chitin_builder "
 
     #####Select crystal
      menubutton $w.crystalpick -textvar ::chitin::crystal \
