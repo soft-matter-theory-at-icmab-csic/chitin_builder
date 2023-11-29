@@ -662,7 +662,7 @@ proc ::chitin::chitin_gui_new {} {
 			  set ::chitin::yv2 [expr $::chitin::bv2*$::chitin::bvalue*$::chitin::ydim]; \
 			  set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
 			  set ::chitin::bdim [expr $::chitin::bvalue*$::chitin::ydim]; \
-			  set ::chitin::fname [tk_chooseDirectory]; \
+			  set ::chitin::fname [tk_chooseDirectory -initialdir ~ ]; \
      		      if {$::chitin::fname ne ""} {
 			  [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]
 		      }
