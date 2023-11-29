@@ -663,7 +663,10 @@ proc ::chitin::chitin_gui_new {} {
 			  set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
 			  set ::chitin::bdim [expr $::chitin::bvalue*$::chitin::ydim]; \
 			  set ::chitin::fname [tk_chooseDirectory]; \
-		       [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]}
+     		      if {$::chitin::fname ne ""} {
+			  [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]
+		      }
+	    }
 
 	##### Labels of the generated cell data
 	label $w.lab60 \
