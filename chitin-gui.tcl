@@ -241,6 +241,8 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
     puts $logfile "alpha=90.0 beta=90.0 c=$::chitin::bangle"
     puts $logfile "--------------------------------"
     puts $logfile "--------------------------------"
+
+    close $logfile
     
 }
 ##################################################################
