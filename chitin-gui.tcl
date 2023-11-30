@@ -131,6 +131,14 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
         set basisVector1 [list 1.0 0.0 0.0]
         set basisVector2 [list 0.0 1.0 0.0]
         set basisVector3 [list 0.0 0.0 1.0]
+
+ 	set ::chitin::xv1 [expr $l1*$n1]
+	set ::chitin::xv2 0.0
+	set ::chitin::yv1 [expr 0.0*$l2*$n2]
+	set ::chitin::yv2 [expr 1.0*$l2*$n2]
+	set ::chitin::zv3 [expr $l3*$n3]
+	set ::chitin::bdim [expr $l2*$n2]
+	set ::chitin::bangle 90.0
     }
         if {$crys=="Beta"} {
     
@@ -139,12 +147,20 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
         # Output (create output file)
         set outPdb $::chitin::fname/crystal-beta-temp.pdb
         # Unit cell vectors
-		set l1 9.638	
-		set l2 18.478
-		set l3 10.384
-		set basisVector1 [list 1.0 0.0 0.0]
-		set basisVector2 [list 0.125 0.992 0.0]
-		set basisVector3 [list 0.0 0.0 1.0]
+	set l1 9.638	
+	set l2 18.478
+	set l3 10.384
+	set basisVector1 [list 1.0 0.0 0.0]
+	set basisVector2 [list 0.125 0.992 0.0]
+	set basisVector3 [list 0.0 0.0 1.0]
+
+	set ::chitin::xv1 [expr $l1*$n1]
+	set ::chitin::xv2 0.0
+	set ::chitin::yv1 [expr 0.125*$l2*$n2]
+	set ::chitin::yv2 [expr 0.992*$l2*$n2]
+	set ::chitin::zv3 [expr $l3*$n3]
+	set ::chitin::bdim [expr $l2*$n2]
+	set ::chitin::bangle 97.16  
     }
 	
 	set out [open $outPdb w]
@@ -657,12 +673,7 @@ proc ::chitin::chitin_gui_new {} {
         -activebackground {#f9f9f9} -activeforeground black \
         -background {#d9d9d9} -font TkDefaultFont -foreground {#000000} \
 	-highlightcolor black -text {Generate Chitin Structure}\
-	    -command {set ::chitin::xv1 [expr $::chitin::avalue*$::chitin::xdim]; \
-			  set ::chitin::yv1 [expr $::chitin::bv1*$::chitin::bvalue*$::chitin::ydim]; \
-			  set ::chitin::yv2 [expr $::chitin::bv2*$::chitin::bvalue*$::chitin::ydim]; \
-			  set ::chitin::zv3 [expr $::chitin::cvalue*$::chitin::zdim]; \
-			  set ::chitin::bdim [expr $::chitin::bvalue*$::chitin::ydim]; \
-			  set ::chitin::fname [tk_chooseDirectory -initialdir ~ ]; \
+	    -command { set ::chitin::fname [tk_chooseDirectory -initialdir ~ ]; \
      		      if {$::chitin::fname ne ""} {
 			  [namespace code {::chitin::replicate "$::chitin::xdim" "$::chitin::ydim" "$::chitin::zdim" "$::chitin::crystal" "$::chitin::perio"}]
 		      }
