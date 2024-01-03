@@ -2,7 +2,7 @@
 # Chitin builder tool
 # Developed by D.C. Malaspina and J. Faraudo
 # ICMAB-CSIC
-# 2019
+# First version 2019 Modified January 2024
 # Distribution under GNL v3
 #
 
