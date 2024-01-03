@@ -95,7 +95,6 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
 -------------------------------------------
 * **Windows (Manual installation)**
-(WARNING: Compatibility with all versions of Windows is not guaranteed. We strongly suggest using this tool in Linux or Mac.)
 
 1) Locate the vmd folder in which the program VMD is installed. 
 A typical location is C:\Program Files (x86)\University of Illinois\VMD
@@ -126,3 +125,12 @@ Data of the unit cell used for the generation of the new crystal would appear un
 4) **Generate chitin structure button:** will prompt a dialog box for the destination folder and will generate a PDB + PSF file named: "crystal-alpha-psf.pdb / psf or crystal-beta-psf.pdb / psf" with the crystal structure and topology file.
 
 The data for the new crystal cell would be print under the generate structure button and the same data will be print on the file "crystal.log".
+
+-------------------------------------------
+* **Troubleshooting**
+
+Some Windows/MAC OS users experience an output writting error when the chitin builder tries to save the output data files. 
+We are still working on fixing this problem, but in the meantime we have found a trick that can be used as a workaround.
+Once the error appeared, accept the error messages and without closing the chitin builder open the Tk console (go to the VMD menu and select Extensions - Tk Console). Once at the Tk console, use the cd command to go to the folder where writting of chitin output data was attempted (for example, if you have a folder named test in your home folder, simply type cd test) . 
+Then, go again to the Chitin builder and try to save again the data to the selected folder.
+This time, it should work without further problems.
