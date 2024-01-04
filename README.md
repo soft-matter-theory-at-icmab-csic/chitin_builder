@@ -93,6 +93,14 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 2) Copy or move the chitin builder that you have downloaded to this new folder. 
 
 3) Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
+
+** WARNING FOR MAC USERS **
+
+Some MAC OS users experience an output writting error when the chitin builder tries to save the output data files. 
+This is due to a VMD bug in MAC OS and can be solved very easily by simply opening the Tk console before using the chitin builder.
+To open the Tk console, simply go to the VMD menu and select Extensions - Tk Console. 
+Once the Tk console is open you can select the Chitin builder form the VMD Extensions menu (it is also OK to open first the chitin builder and then the Tk console).
+
 -------------------------------------------
 * **Windows (Manual installation)**
 
@@ -127,10 +135,6 @@ Data of the unit cell used for the generation of the new crystal would appear un
 The data for the new crystal cell would be print under the generate structure button and the same data will be print on the file "crystal.log".
 
 -------------------------------------------
-* **Troubleshooting**
 
-Some MAC OS users experience an output writting error when the chitin builder tries to save the output data files. 
-We are still working on fixing this problem, but in the meantime we have found a trick that can be used as a workaround.
-The trick consists on the following. Open the Tk console (go to the VMD menu and select Extensions - Tk Console). Once at the Tk console, use the cd command to go to the folder where you want to store the chitin output data (for example, if you have a folder named test in your home folder, simply type cd test). 
-Then, go to the Chitin builder, generate the desired structure and select to save the data to the previously selected folder.
-The trick can be applied at any time (even after an error message from chitin builder appeared).
+
+
