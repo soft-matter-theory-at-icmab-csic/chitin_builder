@@ -116,7 +116,7 @@ proc ::chitin::replicate {n1 n2 n3 crys per} {
 	error "to many residues! reduce x, y or z"
     }
     global env
-    puts $env(CHITINDIR)
+    #puts $env(CHITINDIR)
     if {$crys=="Alpha"} {
     
         # Input pdb for alpha crystal
@@ -298,7 +298,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    #generates a pdb of each fixed chain fragment
 	    $tot writepdb $::chitin::fname/fragment_$i-r.pdb
 	    #rm fragment_$i.pdb
-	    file delete $::chitin::fname/fragment_$i.pdb
+	    catch {file delete -force $::chitin::fname/fragment_$i.pdb}
 	    mol delete top
 	}
 	mol delete top
@@ -353,7 +353,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	#remove intermediate files
 	for {set i 0} {$i<$chnum} {incr i} {
 	    #    rm fragment_$i-r.pdb
-	    file delete $::chitin::fname/fragment_$i-r.pdb
+	    catch {file delete -force $::chitin::fname/fragment_$i-r.pdb}
 	}
 	mol new $::chitin::fname/crystal-alpha-psf.psf
 	mol addfile $::chitin::fname/crystal-alpha-psf.pdb type pdb
@@ -389,7 +389,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	    #generates a pdb of each fixed chain fragment
 	    $tot writepdb $::chitin::fname/fragment_$i-r.pdb
 	    #rm fragment_$i.pdb
-	    file delete $::chitin::fname/fragment_$i.pdb
+	    catch {file delete -force $::chitin::fname/fragment_$i.pdb}
 	    mol delete top
 	}
 	mol delete top
@@ -420,7 +420,7 @@ proc ::chitin::file_gen {n1 n2 n3 crys1 per1} {
 	#remove intermediate files
 	for {set i 0} {$i<$chnum} {incr i} {
 	    # rm fragment_$i-r.pdb
-	    file delete $::chitin::fname/fragment_$i-r.pdb
+	    catch {file delete -force $::chitin::fname/fragment_$i-r.pdb}
 	}
 	mol new $::chitin::fname/crystal-beta-psf.psf
 	mol addfile $::chitin::fname/crystal-beta-psf.pdb type pdb
