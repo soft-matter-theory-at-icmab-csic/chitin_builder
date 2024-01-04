@@ -129,8 +129,8 @@ The data for the new crystal cell would be print under the generate structure bu
 -------------------------------------------
 * **Troubleshooting**
 
-Some Windows/MAC OS users experience an output writting error when the chitin builder tries to save the output data files. 
+Some MAC OS users experience an output writting error when the chitin builder tries to save the output data files. 
 We are still working on fixing this problem, but in the meantime we have found a trick that can be used as a workaround.
-Once the error appeared, accept the error messages and without closing the chitin builder open the Tk console (go to the VMD menu and select Extensions - Tk Console). Once at the Tk console, use the cd command to go to the folder where writting of chitin output data was attempted (for example, if you have a folder named test in your home folder, simply type cd test) . 
-Then, go again to the Chitin builder and try to save again the data to the selected folder.
-This time, it should work without further problems.
+The trick consists on the following. Open the Tk console (go to the VMD menu and select Extensions - Tk Console). Once at the Tk console, use the cd command to go to the folder where you want to store the chitin output data was attempted (for example, if you have a folder named test in your home folder, simply type cd test). 
+Then, go to the Chitin builder, generate the desired structure and select to save the data to the previously selected folder.
+The trick can be applied at any time (even after an error message from chitin builder appeared).
