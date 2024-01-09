@@ -118,7 +118,8 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 ## Usage
 
-once installed, the chitin builder can be used from the GUI available as a new VMD option or from the VMD Tk command line (see the User Manual for details). 
+Once installed, the chitin builder can be used from the GUI available as a new VMD option or from the VMD Tk command line (see the User Manual for details). 
+
 For new users, the simplest option is using the GUI interface which can be selected from VMD - Extensions menu.
 
 ![alternativetext](/examples/example-b-beta-2-2-4/beta-2-2-4.png)
