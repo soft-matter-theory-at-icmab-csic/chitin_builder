@@ -8,7 +8,7 @@ tags:
 authors:
   - name: David Malaspina
     orcid: 0000-0002-5420-9534
-    affiliation: "1, 2 "
+    affiliation: 1
   - name: Jordi Faraudo
     orcid: 0000-0002-6315-4993
     corresponding: true # (This is how to denote the corresponding author)
@@ -16,8 +16,6 @@ authors:
 affiliations:
  - name: Institut de Ciencia de Materials de Barcelona (ICMAB-CSIC),Campus UAB Bellaterra, Barcelona, Spain
    index: 1
- - name: Fundacio Universitat Rovira i Virgili, Av. dels Paisos Catalans 18, 43007, Tarragona, Spain
-   index: 2
 date: 15 February 2023
 bibliography: paper.bib
 ---
