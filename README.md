@@ -7,8 +7,7 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 
 ![alternativetext](icon.png)
 
-It has been developed and tested in Linux and Mac machines. 
-It can be used in machines running Windows but compatilibity is not fully guaranteed.
+It can be used in machines running Linux, Windows and Mac machines.
 For detailed documentation with the methodology please go to the "documentation" folder.
 
 ----------------------------------------------------------------
