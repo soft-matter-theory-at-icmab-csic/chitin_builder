@@ -60,7 +60,7 @@ It an be executed from a graphical user interface (gui) or from the VMD Tk conso
 The source code contains two main parts: the code that calculates the atomic coordinates of the atoms of the crystal and the structure and topology of the crystal and a code responsible for the  graphical user interface (gui).
 The program generates two main outputs: a coordinate file (PDB) containing the position of all the atoms in the generated structure and a topology file (PSF) containing all the bonds, angles and dihedrals according to CHARMM36 carbohydrate section [@Guvench2011CHARMMModeling].
 These output files are named crystal-alpha-psf.pdb/psf or crystal-beta-psf.pdb/psf depending on the allomorph, and are stored in the working folder choosen by the user. 
-This two files, plus the included CHARMM36 parameters file (located in the /ForceField/ folder) allows the user to easily start a molecular dynamics simulation using the NAMD simulation program [@Phillips2005ScalableNAMD] that accompanies VMD.
+This two files, plus the included CHARMM36 parameters file (located in the /ForceField/ folder) allow the user to easily start a molecular dynamics simulation using the NAMD simulation program [@Phillips2005ScalableNAMD] that accompanies VMD.
 Also, using VMD, the users can easily export the data from these two files (PDB and PSF) to other coordinates formats or convert the topology to the formats required by other programs such as GROMACS [@VanDerSpoel2005GROMACS:Free; @Hess2008GROMACSSimulation] using the topotools plugin included in VMD. 
 
 Details on installation of the software, the user manual and examples of code use are provided in the GitHUb code repository.
