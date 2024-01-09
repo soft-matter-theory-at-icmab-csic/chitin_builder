@@ -32,9 +32,13 @@ For detailed documentation with the methodology please go to the "documentation"
 
 * icon.png: image of a chitin monomer.
 
-* /structures/ : Folder with unit cell structures and topologies needed to generate alpha or beta chitin crystals.
+* /structures/ Folder with unit cell structures and topologies needed to generate alpha or beta chitin crystals.
 
-* /Forcefield/: CHARMM36 carbohydrate parameters for running a MD simulation using the obtained structures.
+* /Forcefield/ CHARMM36 carbohydrate parameters for running a MD simulation using the obtained structures.
+
+* /documentation/ Folder containing the user Manual
+
+* /paper/ Folder containing the paper submited to JOSS journal
 
 * /examples/: several examples of generated structures using chitin builder. Each subfolder contains a screenshot of the input parameters and the output files.
 
