@@ -115,10 +115,13 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 
 
+-------------------------------------------
 ## Usage
 
 Once installed, the chitin builder can be used from the GUI available as a new VMD option or from the VMD Tk command line (see the User Manual for details). 
 
+* **Usage from the Graphical User Interface**
+  
 For new users, the simplest option is using the GUI interface which can be selected from VMD menu (select: Extensions - Modelling - Chitin Builder).
 
 ![alternativetext](/examples/example-b-beta-2-2-4/beta-2-2-4.png)
@@ -136,6 +139,35 @@ Data of the unit cell used for the generation of the new crystal would appear un
 4) **Generate chitin structure button:** will prompt a dialog box for the destination folder and will generate a PDB + PSF file named: "crystal-alpha-psf.pdb / psf or crystal-beta-psf.pdb / psf" with the crystal structure and topology file.
 
 The data for the new crystal cell would be print under the generate structure button and the same data will be print on the file "crystal.log".
+
+* **Usage from the Tk Console**
+
+Actually, it is possible to invoke the Chitin Builder functionality without using the Graphical User Interface described in the previous subsection.
+Once the software is installed, from the VMD menu select the Tk Console instead of selecting the Graphical user interface.
+
+Now, at the Tk Console the Chitin Builder can be called by typing:
+
+package require chitin
+
+We also need to set the working directory for chitin builder:
+
+set chitin::fname myfolder
+
+where "myfolder" is the desired working directory (both for temporary usage and final data storage).
+This adds a new “replicate” functionality that allows the creation of chitin crystals.
+The command has the following usage:
+
+chitin::replicate n1 n2 n3 crys1 per1
+
+The arguments n1, n2 and n3 should be integers representing the number of replicas in x, y and z respectively.
+The argument crys1 should be the string “Alpha” or “Beta” depending on the chitin crystal structure to replicate.
+The argument per1 should be the string “yes” or “no” depending if you want periodic bonds between the first and last residue.
+
+The following screenshots show typical input and output examples for generating a crystal using the Tk console (see the Manual for details).
+
+
+After using the Chitin Builder through the VMD command line, an error appears if afterwards you try to generate a crystal using the GUI. 
+If you wish to use the GUI, restart VMD.
 
 -------------------------------------------
 
