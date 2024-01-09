@@ -32,13 +32,9 @@ For detailed documentation with the methodology please go to the "documentation"
 
 * icon.png: image of a chitin monomer.
 
-* /structures/alpha-4residues.pdb: initial structure for alpha chitin.
+* /structures/ : Folder with unit cell structures and topologies needed to generate alpha or beta chitin crystals.
 
-* /structures/beta-4residues.pdb: initial structure for beta chitin.
-
-* /structure/top_all36_carb.rtf: CHARMM36 carbohydrate topology file for generating psf files.
-
-* /Forcefield/par_all36_carb.prm: CHARMM36 carbohydrate parameters file for running a simulation.
+* /Forcefield/: CHARMM36 carbohydrate parameters for running a MD simulation using the obtained structures.
 
 * /examples/: several examples of generated structures using chitin builder. Each subfolder contains a screenshot of the input parameters and the output files.
 
