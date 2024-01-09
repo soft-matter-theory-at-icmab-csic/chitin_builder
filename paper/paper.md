@@ -39,12 +39,6 @@ It is so prevalent in nature that it constitutes the second most abundant polyme
 From the point of view of material sciences, chitin is biorenewable, environmentally friendly, biocompatible and biodegradable material.
 It has applications as a chelating agent, water treatment additive, drug carrier, biodegradable pressure‐sensitive adhesive tape, wound‐healing agents and many others [@Zargar2015AApplications; @Shamshina2019AdvancesReview; @RaviKumar2000AApplications]. 
 
-\begin{figure}[ht]
-\includegraphics[width=0.9\columnwidth]{alpha-beta.png}
-\caption{Structure of chitin crystal allomorphs $\alpha$ and $\beta$.   a) $\alpha$ chitin primitive unit cell. b) $\beta$ chitin expanded unit cell (corresponding to 2 primitive unit cells). c) scheme of the antiparallel organization of the chains in $\alpha$ chitin, indicated by arrows over a crystal generated with the input for the number of replicas $a$=1 $b$=2 $c$=3. d) scheme of the parallel chain organization in $\beta$ chitin, indicated by arrows over a crystal generated with the input for the number of replicas $a$=1 $b$=2 $c$=3 (note that an extra plane of molecules is below the image in this case). Chitin molecules are shown in bond representation in all cases (O in red, H in white, N in blue and H in white). Figure made with VMD.}
-\label{fgr:crystals}
-\end{figure}
-
 The posibility to generate atomic coordinates of the crystal structures of chitin is important from both a fundamental and practical point of view, since it opens the possibility to predict the properties of chitin based materials and derivatives (mechanical, thermal, interaction with solvents,...).
 Starting from the atomic coordinates provided by crystal structures, it is possible to perform Molecular Dynamics (MD) simulations of chitin and study its properties and its interactions with other materials.
 However, up to date, there are only a few works that deal with all-atomic MD simulations of chitin  [@Yu2017Flexibility; @McDonnell2016MolecularFilms; @Strelcova2016TheSimulations; @Jin2013MechanicalStudy].
