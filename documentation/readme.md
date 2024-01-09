@@ -1,1 +1,1 @@
-Documentation for installation and methods in a pdf file
+Document (pdf) with the User Manual of the program. Includes installation instructions, methods and examples.
