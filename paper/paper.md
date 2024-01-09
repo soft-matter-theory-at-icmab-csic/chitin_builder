@@ -45,12 +45,12 @@ It has applications as a chelating agent, water treatment additive, drug carrier
 \label{fgr:crystals}
 \end{figure}
 
-The knowledge of the crystal structures of chitin with atomistic resolution is important from both a fundamental and practical point of view, since it opens the possibility to predict the properties of chitin based materials and derivatives (mechanical, thermal, interaction with solvents,...) from the knowledge of its molecular structure.
+The posibility to generate atomic coordinates of the crystal structures of chitin is important from both a fundamental and practical point of view, since it opens the possibility to predict the properties of chitin based materials and derivatives (mechanical, thermal, interaction with solvents,...).
 Starting from the atomic coordinates provided by crystal structures, it is possible to perform Molecular Dynamics (MD) simulations of chitin and study its properties and its interactions with other materials.
 However, up to date, there are only a few works that deal with all-atomic MD simulations of chitin  [@Yu2017Flexibility; @McDonnell2016MolecularFilms; @Strelcova2016TheSimulations; @Jin2013MechanicalStudy].
 These studies explore important practical questions such as the interaction of chitin with proteins or the mechanical properties of chitin.
 
-The lack of atomistic simulations of chitin, is even more surprising when we compare this situation with the case of cellulose, which is the other most abundant polysaccharide. 
+The lack of atomistic simulations of chitin is even more surprising when we compare this situation with the case of cellulose, which is the other most abundant polysaccharide. 
 In the case of cellulose, there are many atomistic simulation works, deriving the most diverse features of cellulose from the known crystal structure [@Malaspina2019MolecularNanocrystals].
 We think that one possible reason for this difference is the availability of a cellulose builder tool [@Gomes2012Cellulose-Builder:Cellulose] that allows an easy build up of atomistic configurations and structure/topology files that can be used for MD simulations.
 Since these materials are complex materials, the build up of the files required for the simulations is not a trivial task. 
