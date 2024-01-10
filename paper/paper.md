@@ -33,11 +33,11 @@ The resulting structure is automatically saved in PDB and PSF format (used by we
 # Statement of Need
 
 Chitin is a polysaccharide present in the exoskeleton and internal structure of many invertebrates like molluscs, crustaceans, insects, fungus, algae, and other related organisms [@Dutta2002CHITINAPPLICATIONS; @Zargar2015AApplications].
-It is so prevalent in nature that it constitutes the second most abundant polymerized form of carbon in Earth.
+It is so prevalent in nature that it constitutes the second most abundant polymerized form of carbon on Earth.
 From the point of view of material sciences, chitin is biorenewable, environmentally friendly, biocompatible and biodegradable material.
 It has applications as a chelating agent, water treatment additive, drug carrier, biodegradable pressure‐sensitive adhesive tape, wound‐healing agents and many others [@Zargar2015AApplications; @Shamshina2019AdvancesReview; @RaviKumar2000AApplications]. 
 
-The posibility to generate atomic coordinates of the crystal structures of chitin is important from both a fundamental and practical point of view, since it opens the possibility to predict the properties of chitin based materials and derivatives (mechanical, thermal, interaction with solvents,...).
+The possibility to generate atomic coordinates of the crystal structures of chitin is important from both a fundamental and practical point of view, since it opens the possibility to predict the properties of chitin based materials and derivatives (mechanical, thermal, interaction with solvents,...).
 Starting from the atomic coordinates provided by crystal structures, it is possible to perform Molecular Dynamics (MD) simulations of chitin and study its properties and its interactions with other materials.
 However, up to date, there are only a few works that deal with all-atomic MD simulations of chitin  [@Yu2017Flexibility; @McDonnell2016MolecularFilms; @Strelcova2016TheSimulations; @Jin2013MechanicalStudy].
 These studies explore important practical questions such as the interaction of chitin with proteins or the mechanical properties of chitin.
@@ -56,14 +56,15 @@ Future developments of these plugin will incorporate the generation of crystal s
 # Brief description of the Program use and features
 
 The code is a plugin for VMD written in tcl/tk v8.4 programming language.
-It an be executed from a graphical user interface (gui) or from the VMD Tk console command line.
-The source code contains two main parts: the code that calculates the atomic coordinates of the atoms of the crystal and the structure and topology of the crystal and a code responsible for the  graphical user interface (gui).
+It an be executed from a graphical user interface (GUI) or from the VMD Tk console command line.
+The source code contains two main parts: the code that calculates the atomic coordinates of the atoms of the crystal and the structure and topology of the crystal and a code responsible for the  graphical user interface (GUI).
+The calculation of the atomic coordinates is made based on published unit cells for the different chitin crystal allomorphs (see Methods section in the User Manual for details).
 The program generates two main outputs: a coordinate file (PDB) containing the position of all the atoms in the generated structure and a topology file (PSF) containing all the bonds, angles and dihedrals according to CHARMM36 carbohydrate section [@Guvench2011CHARMMModeling].
 These output files are named crystal-alpha-psf.pdb/psf or crystal-beta-psf.pdb/psf depending on the allomorph, and are stored in the working folder choosen by the user. 
 This two files, plus the included CHARMM36 parameters file (located in the /ForceField/ folder) allow the user to easily start a molecular dynamics simulation using the NAMD simulation program [@Phillips2005ScalableNAMD] that accompanies VMD.
 Also, using VMD, the users can easily export the data from these two files (PDB and PSF) to other coordinates formats or convert the topology to the formats required by other programs such as GROMACS [@VanDerSpoel2005GROMACS:Free; @Hess2008GROMACSSimulation] using the topotools plugin included in VMD. 
 
-Details on installation of the software, the user manual and examples of code use are provided in the GitHUb code repository.
+Details on installation of the software, the user manual and examples of code use are provided in the GITHUB code repository.
 
 # Acknowledgements
 
