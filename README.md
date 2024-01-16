@@ -13,7 +13,7 @@ For detailed documentation with the User Manual please check out the "documentat
 
 ## Citation
 
-Please cite the our software and its corresponding publication as follows:
+Please cite our software and its corresponding publication as follows:
 [how to cite](CITATION.md)
 
 ----------------------------------------------------------------
