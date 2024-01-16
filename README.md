@@ -1,5 +1,6 @@
-# chitin_builder
-Chitin builder is a VMD plugin that generates crystal coordinates and structural/topology files of alpha or beta chitin for use in MD simulations.
+# Chitin Builder
+
+Chitin Builder is a VMD plugin that generates crystal coordinates and structural/topology files of alpha or beta chitin for use in MD simulations.
 
 *Developed by D. C. Malaspina and J. Faraudo at Institut de Ciencia de Materials de Barcelona (ICMAB-CSIC)*
 
@@ -7,7 +8,7 @@ Chitin builder is a VMD plugin that generates crystal coordinates and structural
 
 ![alternativetext](icon.png)
 
-It can be used in machines with Linux, Windows and MAC OS. Requires VMD.
+It can be used in machines with Linux, Windows and macOS. Requires VMD.
 For detailed documentation with the User Manual please check out the "documentation" folder.
 
 ----------------------------------------------------------------
@@ -50,7 +51,7 @@ Please cite the following JOSS article:
 ## Installation
 
 Please download and unzip the code from the Download button in this repository or clone by git clone. 
-To add the builder to the standard VMD extensions-modelling menu, please select the appropiate instructons depending on your OS:
+To add the builder to the standard VMD extensions-modelling menu, please select the appropriate instructions depending on your OS:
 
 -----------------------------------------
 * **Ubuntu (automatic)**
@@ -60,7 +61,7 @@ From a terminal execute ./install.sh
 
 Open VMD. Now you should have the Chitin_Builder menu installed under Extensions/Modeling/Chitin Builder/
 
-Note: The installation script assumes that VMD is localted in the default folder /usr/local/lib. You can modify this setting by editing the install.sh file with any editor of your choice.
+Note: The installation script assumes that VMD is located in the default folder /usr/local/lib. You can modify this setting by editing the install.sh file with any editor of your choice.
 
 -------------------------------------------
 * **All Linux (Manual installation)**
@@ -70,7 +71,7 @@ Inside the vmd folder, locate the folder vmd/plugins/noarch/tcl/ that contains m
 Inside this tcl folder, create a new folder with the name chitin1.0
 
 2) Copy or move the chitin builder that you have downloaded to this new folder. You need superuser privileges.
-For example, in ubuntu you can open a terminal inside the folder of the chitin buildir that you just extracted and type:
+For example, in ubuntu you can open a terminal inside the folder of the chitin builder that you just extracted and type:
 
 sudo cp -r * /usr/local/lib/vmd/plugins/noarch/tcl/chitin1.0/
 
@@ -95,9 +96,9 @@ Inside this tcl folder, create a new folder with the name chitin1.0
 
 ** WARNING FOR MAC USERS **
 
-Some MAC OS users experience an output writting error when the chitin builder tries to save the output data files. 
-This is due to a VMD bug in MAC OS and can be solved very easily by simply opening the Tk console before using the chitin builder.
 To open the Tk console, simply go to the VMD menu and select Extensions - Tk Console. 
+Some macOS users experience an output writing error when the chitin builder tries to save the output data files.
+This is due to a VMD bug in macOS and can be solved very easily by simply opening the Tk console before using the chitin builder.
 Once the Tk console is open you can select the Chitin builder form the VMD Extensions menu (it is also OK to open first the chitin builder and then the Tk console).
 
 -------------------------------------------
