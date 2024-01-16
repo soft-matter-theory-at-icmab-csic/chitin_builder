@@ -56,7 +56,7 @@ Future developments of the plugin will incorporate the generation of crystal str
 # Brief Description of the Program Use and Features
 
 The code is a plugin for VMD written in the Tcl/Tk v8.4 programming language.
-It an be executed from a graphical user interface (GUI) or from the VMD Tk console command line.
+It can be executed from a graphical user interface (GUI) or from the VMD Tk console command line.
 The source code contains two main parts: the code that calculates the atomic coordinates of the atoms of the crystal and the structure and topology of the crystal and code responsible for the graphical user interface (GUI).
 The calculation of the atomic coordinates is made based on published unit cells for the different chitin crystal allomorphs (see Methods section in the User Manual for details).
 The program generates two main outputs: a coordinate file (PDB) containing the position of all the atoms in the generated structure and a topology file (PSF) containing all the bonds, angles and dihedrals according to CHARMM36 carbohydrate section [@Guvench2011CHARMMModeling].
