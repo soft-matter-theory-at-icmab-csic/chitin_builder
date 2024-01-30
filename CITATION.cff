@@ -1,0 +1,38 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Malaspina
+  given-names: David
+  orcid: "https://orcid.org/0000-0002-5420-9534"
+- family-names: Faraudo
+  given-names: Jordi
+  orcid: "https://orcid.org/0000-0002-6315-4993"
+contact:
+- family-names: Faraudo
+  given-names: Jordi
+  orcid: "https://orcid.org/0000-0002-6315-4993"
+doi: 10.5281/zenodo.3274725
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Malaspina
+    given-names: David
+    orcid: "https://orcid.org/0000-0002-5420-9534"
+  - family-names: Faraudo
+    given-names: Jordi
+    orcid: "https://orcid.org/0000-0002-6315-4993"
+  date-published: 2024-01-29
+  doi: 10.21105/joss.05771
+  issn: 2475-9066
+  issue: 93
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 5771
+  title: "Chitin Builder: a VMD tool for the generation of structures of
+    chitin molecular crystals for atomistic simulations"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.05771"
+  volume: 9
+title: "Chitin Builder: a VMD tool for the generation of structures of
+  chitin molecular crystals for atomistic simulations"
