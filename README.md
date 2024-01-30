@@ -1,6 +1,8 @@
 # Chitin Builder
 
 Chitin Builder is a VMD plugin that generates crystal coordinates and structural/topology files of alpha or beta chitin for use in MD simulations.
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.05771/status.svg)](https://doi.org/10.21105/joss.05771)
+
 
 *Developed by D. C. Malaspina and J. Faraudo at Institut de Ciencia de Materials de Barcelona (ICMAB-CSIC)*
 
